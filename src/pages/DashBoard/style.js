@@ -12,10 +12,6 @@ export const Header = styled.div `
     border-radius: 5px;
 `
 
-export const Avatar = styled.div `
-    
-`
-
 export const Main = styled.div `
     width: 80%;
     margin: auto;
@@ -37,6 +33,7 @@ export const Card = styled.div `
     display: flex;
     flex-direction: column;
     box-shadow: 1px 1px 10px black;
+    border-radius: 10px;
 
     @media (max-width: 1800px){
         width: 600px;
@@ -54,15 +51,87 @@ export const Head = styled.div `
 `
 
 export const Profile = styled.div `
-    width: 32%;
-    background-color: #F5F5F5;
+    width: 480px;
+`
+
+export const Avatar = styled.div `
+    border-radius: 50%;
+    background-color: #11995E;
+`
+
+export const Course = styled.div `
+    display: flex;
+    flex-direction: row;
     padding: 15px;
+    background-color: #403CAA;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    color: white;
+`
+
+export const Name = styled.div `
+    width: 300px;
+    margin: 0px 5px;
+`
+
+export const CourseModule = styled.div `
+    width: 300px;
+    margin: 10px 5px;
+`
+
+export const About = styled.div `
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+`
+
+export const Contact = styled.div `
+    width: 100%;
+    background-color: white;
+`
+export const CardContact = styled.div `
+    width: 90%;
+    margin: 15px auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #F5F5F5;
+    display: flex;
+    flex-direction: row;
+`
+
+export const CardContactEmail = styled.div `
+    background-color: #11995E;
+    width: 90%;
+    margin: 15px auto;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+`
+
+export const Box = styled.div `
+    display: flex;
+    flex-direction: column;
+`
+
+export const CardButton = styled.div `
+    width: 90%;
+    margin: auto;
+`
+
+export const LeaveButton = styled.button `
+    width: 100%;
+    color: #999999;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 20px;
+    border-radius: 10px;
 `
 
 export const ShowMoreGreen = styled.button `
     padding: 5px 10px;
     border-radius: 5px;
-    background-color: green;
+    background-color: #11995E;
     color: white;
     font-size: 1.5rem;
     cursor: pointer;
@@ -71,7 +140,7 @@ export const ShowMoreGreen = styled.button `
 export const ShowMorePurple = styled.button `
     padding: 5px 10px;
     border-radius: 5px;
-    background-color: purple;
+    background-color: #403CAA;
     color: white;
     font-size: 1.5rem;
     cursor: pointer;
@@ -82,7 +151,7 @@ export const SpanGreen = styled.span `
     height: 50px;
     line-height: 50px;
     text-align: center;
-    background-color: green;
+    background-color: #11995E;
     color: white; 
     padding: 0px 5px 5px 5px;
     border-radius: 5px;
@@ -93,7 +162,7 @@ export const SpanPurple = styled.span `
     height: 50px;
     line-height: 50px;
     text-align: center;
-    background-color: purple;
+    background-color: #403CAA;
     color: white; 
     padding: 0px 5px 5px 5px;
     border-radius: 5px;
@@ -124,7 +193,7 @@ export const Infos = styled.div `
 `
 export const Difficulty = styled.p`
     background-color: #CAEBDA;
-    color: green;
+    color: #11995E;
     padding: 5px;
     border-radius: 5px;
     margin-top: 3px;

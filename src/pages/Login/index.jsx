@@ -7,11 +7,8 @@ import {yupResolver} from "@hookform/resolvers/yup"
 import {useHistory, Redirect} from "react-router-dom"
 import api from "../../services/index"
 import { toast } from "react-toastify"
-import {useState} from "react"
 
-const Login = ({auth, setAuth}) => {
-
-    const [data, setData] = useState("")
+const Login = ({auth, setAuth, data, setData}) => {
 
     console.log(auth)
 
@@ -31,7 +28,7 @@ const Login = ({auth, setAuth}) => {
         .then(response => {
             localStorage.setItem("@KenzieHub:token", response.data.token)
             setAuth(true)
-            /* setData(response.data) */
+            setData(response.data)
             toast.success("Login Feito!")
             return history.push("/dashboard")
         })

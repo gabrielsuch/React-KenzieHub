@@ -4,11 +4,16 @@ export const ContainerCard = styled.div `
     width: 30%;
     position: fixed;
     top: 110px;
-    left: 600px;
+    left: 33%;
     padding: 10px;
     background-color: white;
     border-radius: 10px;
     box-shadow: 1px 1px 25px black;
+
+    @media (max-width: 1000px){
+        width: 80%;
+        left: 10%;
+    }
 `
 
 export const Header = styled.div `
