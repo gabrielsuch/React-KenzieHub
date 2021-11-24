@@ -24,9 +24,14 @@ const DashBoard = ({auth, setAuth, data, setData}) => {
 
     const history = useHistory()
 
+    if(!auth)
+    {
+        history.push("/login")
+    }
+
     const logout = () => {
         localStorage.clear()
-        history.push("/")
+        history.push("/login")
         setAuth(false)
     }
 
@@ -75,11 +80,6 @@ const DashBoard = ({auth, setAuth, data, setData}) => {
     useEffect(() => {
         updateData()
     }, [])
-
-    if(!auth)
-    {
-        <Redirect to="/"/>
-    }
 
     const showTech = () => {
         setTech(true)
