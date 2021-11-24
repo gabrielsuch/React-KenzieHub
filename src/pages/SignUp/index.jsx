@@ -3,11 +3,13 @@ import {Middle, KenzieHub, Box, Form, Input, Modules, Button, ErrorMessage, Alre
 import * as yup from "yup"
 import {useForm} from "react-hook-form"
 import {yupResolver} from "@hookform/resolvers/yup"
-import {useHistory} from "react-router-dom"
+import {useHistory, Redirect} from "react-router-dom"
 import {toast} from "react-toastify"
 import api from "../../services/index"
 
-const SignUp = ({auth, setAuth}) => {
+const SignUp = () => {
+
+    const token = localStorage.getItem("@KenzieHub:token") || ""
 
     const history = useHistory()
 
@@ -32,6 +34,10 @@ const SignUp = ({auth, setAuth}) => {
             toast.success("Sucesso ao Criar Conta")
         })
         .catch(err => toast.error("Erro ao Criar Conta"))
+    }
+
+    if(token){
+        return <Redirect to="/dashboard"/>
     }
     
     return (

@@ -1,31 +1,81 @@
 import {useHistory} from "react-router-dom"
-import {Header, Avatar, Main, Card, Profile, ShowMoreGreen, ShowMorePurple, Head, SpanGreen, SpanPurple, Li, Infos, Difficulty, RemoveButton, Name, CourseModule, About, Course, Contact, CardContact, CardContactEmail, Box, CardButton, LeaveButton} from "./style"
+import {Header, Avatar, Main, Card, Profile, ShowMoreGreen, ShowMorePurple, Head, Name, CourseModule, About, Course, Contact, CardContact, CardContactEmail, Box, CardButton, LeaveButton, ReactLogo} from "./style"
 import {KenzieHub} from "../SignUp/style"
 import TechnologyButton from "../../components/TechnologyButton/index"
 import WorkButton from "../../components/WorkButton/index"
-import {useState} from "react"
-import {FiPhoneCall} from "react-icons/fi"
+import {useEffect, useState} from "react"
+import {FiPhoneCall, FiMail} from "react-icons/fi"
+import DisplayTechnology from "../../components/DisplayTechnology/index"
+import DisplayWork from "../../components/DisplayWork/index"
+import api from "../../services/index"
+import {Redirect} from "react-router-dom"
+import { toast } from "react-toastify"
 
 const DashBoard = ({auth, setAuth, data, setData}) => {
 
     const [tech, setTech] = useState(false)
     const [work, setWork] = useState(false)
 
-    const [techs, setTechs] = useState([])
-    const [works, setWorks] = useState([])
+    const [techs, setTechs] = useState(data.techs)
+    const [works, setWorks] = useState(data.works)
 
-    const logout = () => {
-        localStorage.clear()
-        setAuth(false)
-    }
-
-    console.log(data)
+    const [token] = useState(() => localStorage.getItem("@KenzieHub:token") || "")
+    const [id] = useState(() => localStorage.getItem("@KenzieHub:id") || "")
 
     const history = useHistory()
 
+    const logout = () => {
+        localStorage.clear()
+        history.push("/")
+        setAuth(false)
+    }
+
+    const updateData = () => {
+        api.get(`/users/${id}`)
+        .then((response) => {
+            setData(response.data)
+        })
+    }
+
+    const removeTech = (tech_id) => {
+        api.delete(`/users/techs/${tech_id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }).then((response) => {
+            toast.success("Tecnologia Excluída!")
+            setTechs(techs.filter((ele) => {
+                return tech_id !== ele.id
+            }))
+        }).catch(err => {
+            toast.error("Não foi possível excluir!")
+            console.log(err)
+        })
+    }
+
+    const removeWork = (tech_id) => {
+        api.delete(`/users/works/${tech_id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }).then((response) => {
+            toast.success("Tecnologia Excluída!")
+            setWorks(works.filter((ele) => {
+                return tech_id !== ele.id
+            }))
+        }).catch(err => {
+            toast.error("Não foi possível excluir!")
+            console.log(err)
+        })
+    }
+
+    useEffect(() => {
+        updateData()
+    }, [techs, works])
+
     if(!auth)
     {
-        history.push("/")
+        <Redirect to="/"/>
     }
 
     const showTech = () => {
@@ -54,17 +104,9 @@ const DashBoard = ({auth, setAuth, data, setData}) => {
                     </Head>
                     <ul>
                     {
-                        techs.map((ele, index) => (
+                        techs?.map((ele, index) => (
                             <>
-                                <Li key={index}>
-                                    <SpanGreen>Tech</SpanGreen>
-                                    <Infos>
-                                        <span>{ele.tech}</span>
-                                        <Difficulty>{ele.level}</Difficulty>
-                                    </Infos>
-                                    <RemoveButton id={index}>Remover</RemoveButton>
-                                </Li>
-
+                                <DisplayTechnology key={index} ele={ele} removeTech={removeTech}/>
                             </>
                         ))
                     }
@@ -77,17 +119,9 @@ const DashBoard = ({auth, setAuth, data, setData}) => {
                     </Head>
                     <ul>
                     {
-                        works.map((ele, index) => (
+                        works?.map((ele, index) => (
                             <>
-                                <Li key={index}>
-                                    <SpanPurple>Work</SpanPurple>
-                                    <Infos>
-                                        <span>{ele.work}</span>
-                                        <span>{ele.description}</span>
-                                    </Infos>
-                                    <RemoveButton>Remover</RemoveButton>
-                                </Li>
-
+                                <DisplayWork key={index} ele={ele} removeWork={removeWork}/>
                             </>
                         ))
                     }
@@ -96,45 +130,45 @@ const DashBoard = ({auth, setAuth, data, setData}) => {
                 <Profile>
                     <Course>
                         <Avatar>
-                            <img src={data.user.avatar_url} alt={data.user.name} />
+                            {/* <img src={data.user.avatar_url} alt={data.user.name} /> */}
                         </Avatar>
                         <About>
                             <Name>
-                                <h2>{data.user.name}</h2>
+                                <h2>{data?.name}</h2>
                             </Name>
                             <CourseModule>
-                                <p>{data.user.course_module}</p>
+                                <p>{data?.course_module}</p>
                             </CourseModule>
                         </About>
                     </Course>
                     <Contact>
                         <CardContact>
-                            {/* COLOCAR O ÍCONE DO CELULAR */}
-                            Celular
+                            <ReactLogo>
+                                <FiPhoneCall/>
+                            </ReactLogo>
                             <Box>
                                 <h2>Ligar Agora</h2>
-                                <span>{data.user.contact}</span>
+                                <span>{data?.contact}</span>
                             </Box>
                         </CardContact>
                         <CardContactEmail>
-                            {/* COLOCAR O ÍCONE DO EMAIL */}
-                            Email
+                            <ReactLogo>
+                                <FiMail/>
+                            </ReactLogo>
                             <Box>
                                 <h2>Enviar Email</h2>
-                                <span>{data.user.email}</span>
+                                <span>{data?.email}</span>
                             </Box>
                         </CardContactEmail>
                     </Contact>
-                    {/* <CardContact> */}
                     <CardButton>
                         <LeaveButton onClick={() => logout()}>Sair</LeaveButton>
-                    {/* </CardContact> */}
                     </CardButton>
                 </Profile>
             </Main>
             {
                 tech ?
-                <TechnologyButton tech={tech} setTech={setTech} techs={techs} setTechs={setTechs}/>
+                <TechnologyButton setTech={setTech} techs={techs} setTechs={setTechs}/>
                 :
                 <>
                 </>

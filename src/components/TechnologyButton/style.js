@@ -1,5 +1,15 @@
 import styled from "styled-components"
 
+export const ShowOnlyContainer = styled.div `
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    position: fixed;
+    opacity: 0.8;
+    background-color: #131313;
+    z-index: 0;
+`
+
 export const ContainerCard = styled.div `
     width: 30%;
     position: fixed;
@@ -8,7 +18,9 @@ export const ContainerCard = styled.div `
     padding: 10px;
     background-color: white;
     border-radius: 10px;
+    opacity: 1;
     box-shadow: 1px 1px 25px black;
+    z-index: 1;
 
     @media (max-width: 1000px){
         width: 80%;

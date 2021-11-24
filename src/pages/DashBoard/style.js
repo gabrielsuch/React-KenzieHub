@@ -1,5 +1,16 @@
 import styled from "styled-components"
 
+export const ShowOnlyContainer = styled.div `
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    position: absolute;
+    opacity: 0.8;
+    background-color: #131313;
+    z-index: 0;
+    border: 2px solid red;
+`
+
 export const Header = styled.div `
     width: 80%;
     margin: 20px auto;
@@ -19,15 +30,17 @@ export const Main = styled.div `
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
+    position: relative;
 
     @media (max-width: 1800px){
         justify-content: space-evenly;
     }
-    
 `
 
 export const Card = styled.div `
     width: 480px;
+    // width: 95%;
+    // max-width: 480px;
     background-color: #F5F5F5;
     padding: 15px;
     display: flex;
@@ -42,6 +55,9 @@ export const Card = styled.div `
     @media (max-width: 700px){
         width: 700px;
     }
+    @media (max-width: 360px){
+        max-width: 360px;
+    }
 `
 
 export const Head = styled.div `
@@ -52,6 +68,9 @@ export const Head = styled.div `
 
 export const Profile = styled.div `
     width: 480px;
+    @media (max-width: 1800px){
+        margin: 20px 0px;
+    }
 `
 
 export const Avatar = styled.div `
@@ -70,12 +89,12 @@ export const Course = styled.div `
 `
 
 export const Name = styled.div `
-    width: 300px;
+    width: 90%;
     margin: 0px 5px;
 `
 
 export const CourseModule = styled.div `
-    width: 300px;
+    width: 90%;
     margin: 10px 5px;
 `
 
@@ -207,5 +226,13 @@ export const RemoveButton = styled.button `
     background-color: red;
     color: white;
     border-radius: 5px;
+    cursor: pointer;
+`
+
+export const ReactLogo = styled.div `
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
     cursor: pointer;
 `

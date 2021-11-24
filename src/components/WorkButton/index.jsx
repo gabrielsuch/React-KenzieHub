@@ -1,4 +1,4 @@
-import {ContainerCard, Header, CloseButton, Input} from "../TechnologyButton/style"
+import {ContainerCard, Header, CloseButton, Input, ShowOnlyContainer} from "../TechnologyButton/style"
 import {Button, ErrorMessage} from "../../pages/SignUp/style"
 import {TextArea} from "./style"
 
@@ -6,11 +6,12 @@ import * as yup from "yup"
 import {useForm} from "react-hook-form"
 import {yupResolver} from "@hookform/resolvers/yup"
 import { toast } from "react-toastify"
+import api from "../../services/index"
 
 const WorkButton = ({setWork, works, setWorks}) => {
 
     const schema = yup.object().shape({
-        work: yup.string().required("Campo Obrigatório"),
+        title: yup.string().required("Campo Obrigatório"),
         description: yup.string().required("Campo Obrigatório"),
     })
 
@@ -19,9 +20,20 @@ const WorkButton = ({setWork, works, setWorks}) => {
     })
 
     const onSubmitFunction = (data) => {
-        console.log(data)
-        setWorks([...works, data])
-        toast.success("Trabalho Criado com Sucesso!")
+        const token = localStorage.getItem("@KenzieHub:token")
+
+        api.post("/users/works", {...data, deploy_url: "https://kenziehub.me"}, {
+            headers: { 
+                Authorization: `Bearer ${token}` 
+            },
+        }).then(response => {
+            setWorks([...works, response.data])
+            toast.success("Trabalho Criado com Sucesso!")
+        })
+        .catch(err => {
+            console.log(err)
+            toast.error("Algum problema ocorreu, e sua tarefa não foi adicionada!")
+        })
     }
 
     const hideWork = () => {
@@ -36,13 +48,14 @@ const WorkButton = ({setWork, works, setWorks}) => {
                     <CloseButton onClick={() => hideWork()}>X</CloseButton>
                 </Header>
                 <form onSubmit={handleSubmit(onSubmitFunction)}>
-                    <Input placeholder="Nome do Trabalho" {...register("work")}/>
+                    <Input placeholder="Nome do Trabalho" {...register("title")}/>
                     <ErrorMessage>{errors.work?.message}</ErrorMessage>
                     <TextArea placeholder="Descrição do Trabalho" rows="8" {...register("description")}/>   
                     <ErrorMessage>{errors.description?.message}</ErrorMessage>          
                     <Button type="submit">Enviar</Button>
                 </form>
             </ContainerCard>
+            <ShowOnlyContainer onClick={() => hideWork()}/>
         </>
     )
 }

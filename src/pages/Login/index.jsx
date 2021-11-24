@@ -8,9 +8,9 @@ import {useHistory, Redirect} from "react-router-dom"
 import api from "../../services/index"
 import { toast } from "react-toastify"
 
-const Login = ({auth, setAuth, data, setData}) => {
+const Login = ({setAuth, setData}) => {
 
-    console.log(auth)
+    const token = localStorage.getItem("@KenzieHub:token") || ""
 
     const history = useHistory()
 
@@ -27,8 +27,9 @@ const Login = ({auth, setAuth, data, setData}) => {
         api.post("/sessions", data)
         .then(response => {
             localStorage.setItem("@KenzieHub:token", response.data.token)
+            localStorage.setItem("@KenzieHub:id", response.data.user.id)
             setAuth(true)
-            setData(response.data)
+            setData(response.data.user)
             toast.success("Login Feito!")
             return history.push("/dashboard")
         })
@@ -37,9 +38,9 @@ const Login = ({auth, setAuth, data, setData}) => {
         })
     }
 
-    // if(auth){
-    //     return history.push("/dashboard")
-    // }
+    if(token){
+        return <Redirect to="/dashboard"/>
+    }
 
     return (
         <Middle>
