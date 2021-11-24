@@ -7,7 +7,7 @@ import {useEffect, useState} from "react"
 const Routes = () => {
 
     const [auth, setAuth] = useState(false)
-    const [data, setData] = useState("")
+    const [data, setData] = useState({})
 
     useEffect(() => {
         const token = localStorage.getItem("@KenzieHub:token")

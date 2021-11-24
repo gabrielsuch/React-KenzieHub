@@ -16,8 +16,8 @@ const DashBoard = ({auth, setAuth, data, setData}) => {
     const [tech, setTech] = useState(false)
     const [work, setWork] = useState(false)
 
-    const [techs, setTechs] = useState(data.techs)
-    const [works, setWorks] = useState(data.works)
+    const [techs, setTechs] = useState([])
+    const [works, setWorks] = useState([])
 
     const [token] = useState(() => localStorage.getItem("@KenzieHub:token") || "")
     const [id] = useState(() => localStorage.getItem("@KenzieHub:id") || "")
@@ -33,8 +33,11 @@ const DashBoard = ({auth, setAuth, data, setData}) => {
     const updateData = () => {
         api.get(`/users/${id}`)
         .then((response) => {
+            setTechs(response.data.techs)
+            setWorks(response.data.works)
             setData(response.data)
         })
+        .catch(err => console.log(err))
     }
 
     const removeTech = (tech_id) => {
@@ -71,7 +74,7 @@ const DashBoard = ({auth, setAuth, data, setData}) => {
 
     useEffect(() => {
         updateData()
-    }, [techs, works])
+    }, [])
 
     if(!auth)
     {
@@ -106,7 +109,7 @@ const DashBoard = ({auth, setAuth, data, setData}) => {
                     {
                         techs?.map((ele, index) => (
                             <>
-                                <DisplayTechnology key={index} ele={ele} removeTech={removeTech}/>
+                                <DisplayTechnology key={ele.id} ele={ele} removeTech={removeTech}/>
                             </>
                         ))
                     }
@@ -121,7 +124,7 @@ const DashBoard = ({auth, setAuth, data, setData}) => {
                     {
                         works?.map((ele, index) => (
                             <>
-                                <DisplayWork key={index} ele={ele} removeWork={removeWork}/>
+                                <DisplayWork key={ele.id} ele={ele} removeWork={removeWork}/>
                             </>
                         ))
                     }

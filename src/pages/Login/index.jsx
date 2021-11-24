@@ -31,7 +31,7 @@ const Login = ({setAuth, setData}) => {
             setAuth(true)
             setData(response.data.user)
             toast.success("Login Feito!")
-            return history.push("/dashboard")
+            history.push("/dashboard")
         })
         .catch(err => {
             toast.error("Erro no Login")
