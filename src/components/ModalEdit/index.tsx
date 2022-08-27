@@ -1,5 +1,4 @@
 import {Container, ShowOnlyContainer, Header, Main, Select, Actions, SaveButton, DeleteButton} from "./style"
-import Input from "../Input/index"
 
 import * as yup from "yup"
 import {useForm} from "react-hook-form"

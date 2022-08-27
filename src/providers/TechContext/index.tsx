@@ -4,6 +4,8 @@ import api from "../../services/api"
 
 import {useAuth} from "../AuthContext/index"
 
+import {toast} from "react-toastify"
+
 
 interface ChildrenProps {
     children: ReactNode
@@ -86,10 +88,13 @@ export const TechProvider = ({children}: ChildrenProps) => {
             }
         })
         .then((_) => {
+            toast.success("Tecnologia Criada!")
+
             getTechs()
             closeModalState()
         })
         .catch((err) => {
+            toast.error("Erro na Criação. Possivelmente esta Tecnologia já existe.")
             console.log(err)
         })
     }

@@ -3,6 +3,8 @@ import {useHistory} from "react-router-dom"
 
 import api from "../../services/api"
 
+import {toast} from "react-toastify"
+
 interface ChildrenProps {
     children: ReactNode
 }
@@ -74,9 +76,13 @@ export const AuthProvider = ({children}: ChildrenProps) => {
         
         api.post("/users", newData)
         .then((_) => {
+            toast.success("Conta Criada com Sucesso!")
+
             history.push("/")
         })
         .catch((err) => {
+            toast.error("Erro na Criação da Conta. Possivelmente este email já existe, ou a senha está fraca.")
+
             console.log(err)
         })
     }
@@ -84,8 +90,11 @@ export const AuthProvider = ({children}: ChildrenProps) => {
     const login = (data: LoginProps) => {
         api.post("/sessions", data)
         .then((response) => {
+            
             const token = response.data.token
             const user = response.data.user
+
+            toast.success(`Seja Bem-vindo, ${user.name}`)
 
             localStorage.setItem("@KenzieHub:token", token)
             localStorage.setItem("@KenzieHub:user", JSON.stringify(user))
@@ -94,6 +103,8 @@ export const AuthProvider = ({children}: ChildrenProps) => {
             history.push("/dashboard")
         })
         .catch((err) => {
+            toast.error("Dados incorretos. Verifique os campos novamente.")
+
             console.log(err)
         })
     }
