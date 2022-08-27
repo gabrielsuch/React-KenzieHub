@@ -42,7 +42,6 @@ const ModalEdit = () => {
                 </Header>
                 <Main>
                     <form onSubmit={handleSubmit(handleClick)}>
-                        <Input name="title" type="text" label="Nome do Projeto" register={register}/>
                         <Select {...register("status")}>
                             {
                                 options.map((option, index) => (

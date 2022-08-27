@@ -100,9 +100,9 @@ export const TechProvider = ({children}: ChildrenProps) => {
                 Authorization: `Bearer ${token}`
             }
         })
-        .then((response) => {
-            console.log(response)
+        .then((_) => {
             getTechs()
+            closeEditState()
         })
         .catch((err) => {
             console.log(err)

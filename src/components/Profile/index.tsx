@@ -12,7 +12,6 @@ const Profile = () => {
                 <Name>Olá, {user.name}</Name>
                 <Module>
                     <h1>{user.course_module}</h1>
-                    <h2>Introdução</h2>
                 </Module>
             </Center>
         </Container>

@@ -26,9 +26,4 @@ export const Module = styled.div `
     h1 {
         color: var(--color-primary);
     }
-
-    h2 {
-        color: var(--color-gray-1);
-        padding: 10px 0px;
-    }
 `
