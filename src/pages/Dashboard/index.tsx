@@ -1,21 +1,22 @@
 import {Container, Center, HeaderTech, Title, PlusIcon, Box} from "./style"
 import Header from "../../components/Header/index"
 import Profile from "../../components/Profile/index"
-import Techs from "../../components/Techs/index"
+import CardTech from "../../components/CardTech/index"
 import ModalAdd from "../../components/ModalAdd/index"
 import ModalEdit from "../../components/ModalEdit/index"
-import {useAuth} from "../../providers/AuthContext/index"
+
+import {useTech} from "../../providers/TechContext/index"
 
 import {useEffect} from "react"
 
 
 const Dashboard = () => {
 
-    const {user, techs, getTechs, openModalState, openModal, openEdit} = useAuth()
+    const {techs, getTechs, openModalState, openModal, openEdit} = useTech()
 
     useEffect(() => {
-        getTechs(user.id)
-    }, [user.id])
+        getTechs()
+    }, [])
 
     return (
         <>
@@ -40,7 +41,7 @@ const Dashboard = () => {
                     <Box>
                         {
                             techs.map((tech, index) => (
-                                <Techs key={index} tech={tech}/>
+                                <CardTech key={index} tech={tech}/>
                             ))
                         }
                     </Box>

@@ -1,4 +1,5 @@
 import {AuthProvider} from "./AuthContext/index"
+import {TechProvider} from "./TechContext/index"
 import {ReactNode} from "react"
 
 interface ChildrenProps {
@@ -8,7 +9,9 @@ interface ChildrenProps {
 export const Providers = ({children}: ChildrenProps) => {
     return (
         <AuthProvider>
-            {children}
+            <TechProvider>
+                {children}
+            </TechProvider>
         </AuthProvider>
     )
 }

@@ -1,6 +1,6 @@
 import {OptionBox, Title, Difficulty} from "./style"
 
-import {useAuth} from "../../providers/AuthContext/index"
+import {useTech} from "../../providers/TechContext/index"
 
 interface Props {
     id: string
@@ -14,9 +14,10 @@ interface TechProps {
     tech: Props
 }
 
-const Techs = ({tech}: TechProps) => {
+const CardTech = ({tech}: TechProps) => {
 
-    const {openEditState} = useAuth()
+    const {openEditState} = useTech()
+
     return (
         <>
             <OptionBox onClick={() => openEditState(tech)}>
@@ -27,4 +28,4 @@ const Techs = ({tech}: TechProps) => {
     )
 }
 
-export default Techs
+export default CardTech

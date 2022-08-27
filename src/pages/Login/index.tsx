@@ -1,4 +1,4 @@
-import {Container, Box, Form, Register, Title, LoginButton, CreateAccount, RegisterButton} from "./style"
+import {Container, Header, Box, Form, Register, Title, LoginButton, CreateAccount, RegisterButton} from "./style"
 
 import Input from "../../components/Input/index"
 
@@ -36,12 +36,17 @@ const Login = () => {
 
     return (
         <Container>
+            <Header>
+                <div className="headerTitle">
+                    <h1>Kenzie Hub</h1>
+                </div>
+            </Header>
             <Box>
                 <Register>
                     <Form onSubmit={handleSubmit(submit)}>
                         <Title>Login</Title>
                         <Input name="email" label="Email" type="text" placeholder="Email" register={register} error={errors.email}/>
-                        <Input name="password" label="Password" type="password" placeholder="Password" register={register} error={errors.password}/>
+                        <Input name="password" label="Senha" type="password" placeholder="Senha" register={register} error={errors.password}/>
                         <LoginButton type="submit">
                             <h2>Entrar</h2>
                         </LoginButton>

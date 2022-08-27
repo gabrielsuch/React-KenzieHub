@@ -1,4 +1,4 @@
-import {createContext, useContext, ReactNode, useState, useEffect} from "react"
+import {createContext, useContext, ReactNode, useState} from "react"
 import {useHistory} from "react-router-dom"
 
 import api from "../../services/api"
@@ -41,67 +41,19 @@ interface UserProps {
     works: []
 }
 
-interface AddTech {
-    id: string
-    title: string
-    status: string
-    created_at: string
-    updated_at: string
-}
-
-interface PropsTitleStatus{
-    title: string
-    status: string
-}
-
-interface Functions {
+interface ContextData {
     createRegister: (data: RegisterProps) => void
     login: (data: LoginProps) => void
     token: string
     user: UserProps
-    addTech: (data: AddTech, user: UserProps, token: string) => void
-    getTechs: (id: string) => void
-    techs: AddTech[]
-    closeModalState: () => void
-    openModalState: () => void
-    openModal: boolean
-    openEdit: boolean
-    closeEditState: () => void
-    openEditState: (tech: AddTech) => void
     logout: () => void
-    actualEditTech: AddTech
-    deleteTech: (tech: AddTech, token: string, user: UserProps) => void
-    updateTech: (tech: AddTech, token: string, data: PropsTitleStatus, user: UserProps) => void
 }
 
-const AuthContext = createContext<Functions>({} as Functions)
+const AuthContext = createContext<ContextData>({} as ContextData)
 
 export const AuthProvider = ({children}: ChildrenProps) => {
     
     const history = useHistory()
-    
-    const [techs, setTechs] = useState<AddTech[]>([])
-    const [openModal, setOpenModal] = useState<boolean>(false)
-    const [openEdit, setOpenEdit] = useState<boolean>(false)
-
-    const [actualEditTech, setActualEditTech] = useState<AddTech>({} as AddTech)
-
-    const closeModalState = () => {
-        setOpenModal(false)
-    }
-
-    const openModalState = () => {
-        setOpenModal(true)
-    }
-
-    const closeEditState = () => {
-        setOpenEdit(false)
-    }
-
-    const openEditState = (tech: AddTech) => {
-        setOpenEdit(true)
-        setActualEditTech(tech)
-    }
 
     const [data, setData] = useState<DataProps>(() => {
         const token = localStorage.getItem("@KenzieHub:token")
@@ -118,18 +70,10 @@ export const AuthProvider = ({children}: ChildrenProps) => {
     })
 
     const createRegister = (data: RegisterProps) => {
-        const newData = {
-            name: data.name,
-            email: data.email,
-            password: data.password,
-            course_module: data.course_module,
-            bio: data.bio,
-            contact: data.contact
-        }
+        const {confirm_password, ...newData} = data
         
         api.post("/users", newData)
-        .then((response) => {
-            console.log(response)
+        .then((_) => {
             history.push("/")
         })
         .catch((err) => {
@@ -158,73 +102,14 @@ export const AuthProvider = ({children}: ChildrenProps) => {
         localStorage.removeItem("@KenzieHub:token")
         localStorage.removeItem("@KenzieHub:user")
         localStorage.clear()
+
+        setData({} as DataProps)
         history.push("/")
     }
 
-    const addTech = (data: AddTech, user: UserProps, token: string) => {
-        api.post("/users/techs/", data, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-        .then((response) => {
-            setTechs([...techs, response.data])
-            closeModalState()
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-    }
-
-    const getTechs = (id: string) => {
-        api.get(`/users/${id}`)
-        .then((response) => {
-            setTechs(response.data.techs)
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-    }
-
-    const deleteTech = (tech: AddTech, token: string, user: UserProps) => {
-        api.delete(`/users/techs/${tech.id}`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-        .then((response) => {
-            closeEditState()
-            getTechs(user.id)
-            // setTechs(techs.filter((newTech) => {
-            //     return tech.id != newTech.id
-            // }))
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-    }
-
-    const updateTech = (tech: AddTech, token: string, data: PropsTitleStatus, user: UserProps) => {
-        console.log(tech)
-        console.log(data)
-
-        api.put(`/users/techs/${tech.id}`, data, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-        .then((response) => {
-            console.log(response)
-            getTechs(user.id)
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-    }
-
-
+    
     return (
-        <AuthContext.Provider value={{createRegister, login, token: data.token, user: data.user, addTech, techs, getTechs, closeModalState, openModalState, openModal, logout, openEdit, closeEditState, openEditState, actualEditTech, deleteTech, updateTech}}>
+        <AuthContext.Provider value={{createRegister, login, token: data.token, user: data.user, logout}}>
             {children}
         </AuthContext.Provider>
     )

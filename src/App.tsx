@@ -1,7 +1,7 @@
 import GlobalStyle from "./styles/global"
 import Route from "./routes/index"
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       <Route/>

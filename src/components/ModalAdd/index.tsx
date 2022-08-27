@@ -5,7 +5,8 @@ import * as yup from "yup"
 import {useForm} from "react-hook-form"
 import {yupResolver} from "@hookform/resolvers/yup"
 
-import {useAuth} from "../../providers/AuthContext/index"
+import {useTech} from "../../providers/TechContext/index"
+
 
 interface DataProps {
     id: string
@@ -17,7 +18,7 @@ interface DataProps {
 
 const ModalAdd = () => {
 
-    const {addTech, closeModalState, user, token} = useAuth()
+    const {addTech, closeModalState} = useTech()
 
     const schema = yup.object().shape({
         title: yup.string().required("Campo Obrigatório"),
@@ -29,7 +30,7 @@ const ModalAdd = () => {
     })
 
     const submit = (data: DataProps) => {
-        addTech(data, user, token)
+        addTech(data)
     }
 
     const options = ["Iniciante", "Intermediário", "Avançado"]

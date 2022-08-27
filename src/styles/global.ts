@@ -7,7 +7,7 @@ const GlobalStyle = createGlobalStyle `
         border: 0;
         box-sizing: border-box;
     }
-    body{
+    body {
         background-color: #131313;
     }
 
@@ -26,13 +26,14 @@ const GlobalStyle = createGlobalStyle `
         --negative: #E83F5B;
     }
 
-    h1{
+    h1 {
         font-weight: bold;
-        font-size: 18px;
+        font-size: 20px;
         color: var(--color-gray-0);
     }
-    h2{
-        font-weight: bEntrarx;
+    
+    h2 { 
+        font-size: 16px;
         color: var(--color-gray-0);
     }
 `

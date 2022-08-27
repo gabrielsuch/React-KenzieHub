@@ -2,10 +2,40 @@ import styled from "styled-components"
 
 export const Container = styled.div `
     width: 100%;
-    height: 100vh;
+    height: 100%;
+    padding: 0px 5px 15px 5px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+`
+
+export const Header = styled.header `
+    max-width: 500px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 30px 0px;
+
+    .headerTitle {
+        h1 {
+            color: var(--color-primary);
+        }
+    }
+
+    .backButton {
+        border-radius: 4px;
+        padding: 10px;
+        background-color: var(--color-gray-3);
+        cursor: pointer;
+        
+        button {
+            color: var(--color-gray-0);
+            background-color: transparent;
+            cursor: pointer;
+        }
+    }
 `
 
 export const Box = styled.div `
@@ -36,9 +66,17 @@ export const Register = styled.div `
     justify-content: center;
 `
 
-export const Title = styled.h1 `
+export const Title = styled.div `
     text-align: center;
     margin: 15px 0px;
+
+    h1 {
+        font-weight: 700;
+    }
+
+    h2 {
+        color: var(--color-gray-1);
+    }
 `
 
 export const RegisterButton = styled.button `

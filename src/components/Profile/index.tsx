@@ -1,6 +1,7 @@
 import {Container, Center, Name, Module} from "./style"
 import {useAuth} from "../../providers/AuthContext/index"
 
+
 const Profile = () => {
 
     const {user} = useAuth()

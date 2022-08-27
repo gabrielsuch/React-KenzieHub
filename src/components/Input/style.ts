@@ -16,7 +16,6 @@ export const InputForm = styled.div `
         padding: 16px;
         margin-top: 5px;
         margin-bottom: 5px;
-        /* margin-bottom: 15px; */
     }
 `
 

@@ -5,7 +5,8 @@ import * as yup from "yup"
 import {useForm} from "react-hook-form"
 import {yupResolver} from "@hookform/resolvers/yup"
 
-import {useAuth} from "../../providers/AuthContext/index"
+import {useTech} from "../../providers/TechContext/index"
+
  
 interface Schema {
     title: string
@@ -14,20 +15,20 @@ interface Schema {
 
 
 const ModalEdit = () => {
-
-    const {closeEditState, actualEditTech, deleteTech, token, user, updateTech} = useAuth()
+    
+    const {deleteTech, updateTech, closeEditState, actualEditTech} = useTech()
 
     const schema = yup.object().shape({
         title: yup.string().optional(),
         status: yup.string().optional()
     })
 
-    const {register, handleSubmit, formState: {errors}} = useForm<Schema>({
+    const {register, handleSubmit} = useForm<Schema>({
         resolver: yupResolver(schema)
     })
 
     const handleClick = (data: Schema) => {
-        updateTech(actualEditTech, token, data, user)
+        updateTech(actualEditTech, data)
     }
 
     const options = ["Iniciante", "Intermediário", "Avançado"]
@@ -44,14 +45,14 @@ const ModalEdit = () => {
                         <Input name="title" type="text" label="Nome do Projeto" register={register}/>
                         <Select {...register("status")}>
                             {
-                                options.map((option) => (
-                                    <option>{option}</option>
+                                options.map((option, index) => (
+                                    <option key={index}>{option}</option>
                                 ))
                             }
                         </Select>
                         <Actions>
                             <SaveButton type="submit">Salvar Alterações</SaveButton>
-                            <DeleteButton type="button" onClick={() => deleteTech(actualEditTech, token, user)}>Excluir</DeleteButton>
+                            <DeleteButton type="button" onClick={() => deleteTech(actualEditTech)}>Excluir</DeleteButton>
                         </Actions>
                     </form>
                 </Main>
