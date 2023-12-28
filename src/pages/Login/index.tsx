@@ -23,8 +23,8 @@ export const Login = () => {
         resolver: yupResolver(loginSchema)
     })
 
-    const submit = (data: TLogin) => {
-        login(data)
+    const onSubmit = async (data: TLogin) => {
+        await login(data)
     }
 
     return (
@@ -36,7 +36,7 @@ export const Login = () => {
             </Header>
             <Box>
                 <Register>
-                    <Form onSubmit={handleSubmit(submit)}>
+                    <Form onSubmit={handleSubmit(onSubmit)}>
                         <Title>Login</Title>
                         <Input id="email" label="Email" type="text" placeholder="Email" register={register} error={errors.email}/>
                         <Input id="password" label="Senha" type="password" placeholder="Senha" register={register} error={errors.password}/>

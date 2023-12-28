@@ -11,11 +11,13 @@ export const Header = () => {
     return (
         <Container>
             <ContainerCenter>
-                <div className="title">
-                    <h1>Kenzie Hub</h1>
-                </div>
-                <div className="containerButton">
-                    <button type="button" onClick={() => logout()}>Sair</button>
+                <div className="containerSplit">
+                    <div className="title">
+                        <h1>Kenzie Hub</h1>
+                    </div>
+                    <div className="containerButton">
+                        <button type="button" onClick={() => logout()}>Sair</button>
+                    </div>
                 </div>
             </ContainerCenter>
         </Container>

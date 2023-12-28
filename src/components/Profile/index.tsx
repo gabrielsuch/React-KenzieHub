@@ -12,10 +12,12 @@ export const Profile = () => {
     return (
         <Container>
             <ContainerCenter>
-                <Name>Olá, {user.name}</Name>
-                <Module>
-                    <h1>{user.course_module}</h1>
-                </Module>
+                <div className="containerSplit">
+                    <Name>Olá, {user.name}</Name>
+                    <Module>
+                        <h1>{user.course_module}</h1>
+                    </Module>
+                </div>
             </ContainerCenter>
         </Container>
     )

@@ -25,8 +25,8 @@ export const Signup = () => {
         resolver: yupResolver(createUserSchema)
     })
     
-    const submit = (data: TCreateUser) => {
-        createRegister(data)
+    const submit = async (data: TCreateUser) => {
+        await createRegister(data)
     }
 
     return (

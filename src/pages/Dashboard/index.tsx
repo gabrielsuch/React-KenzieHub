@@ -1,4 +1,4 @@
-import {Container, HeaderTech, Title, PlusIcon, Box} from "./style"
+import {Container, Box} from "./style"
 import {ContainerCenter} from "../../styles/center"
 
 import {Header} from "../../components/Header/index"
@@ -30,19 +30,23 @@ export const Dashboard = () => {
             {modalOpen === "EditTech" && <ModalEdit/>}
             <Container>
                 <ContainerCenter>
-                    <HeaderTech>
-                        <Title>Tecnologias</Title>
-                        <PlusIcon onClick={() => setModalOpen("AddTech")}>
-                            <Title>+</Title>
-                        </PlusIcon>
-                    </HeaderTech>
+                    <div id="headerTech">
+                        <div className="title">
+                            <h1>Tecnologias</h1>
+                        </div>
+                        <button type="button" onClick={() => setModalOpen("AddTech")}>
+                            <div className="title">
+                                <h1>+</h1>
+                            </div>
+                        </button>
+                    </div>
                     <Box>
                         <ul id="techs">
                         {
                             techs.map((tech, index) => (
                                 <CardTech key={index} tech={tech} setSelectedTech={setSelectedTech} setModalOpen={setModalOpen}/>
-                            ))
-                        }
+                                ))
+                            }
                         </ul>
                     </Box>
                 </ContainerCenter>

@@ -6,4 +6,11 @@ export const ContainerCenter = styled.div `
     width: 100%;
     padding: 20px;
     margin: 0 auto;
+
+    .containerSplit {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
 `
