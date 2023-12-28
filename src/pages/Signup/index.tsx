@@ -48,12 +48,12 @@ const Signup = () => {
                         <Title>
                             <h2>Rápido e Grátis, vamos nessa</h2>
                         </Title>
-                        <Input name="name" label="Nome" type="text" placeholder="Digite aqui seu nome" register={register} error={errors.name}/>
-                        <Input name="email" label="Email" type="text" placeholder="Digite aqui seu email" register={register} error={errors.email}/>
-                        <Input name="password" label="Senha" type="password" placeholder="Digite aqui sua senha" register={register} error={errors.password}/>
-                        <Input name="confirm_password" label="Confirmar Senha" type="password" placeholder="Digite novamente sua senha" register={register} error={errors.confirm_password}/>
-                        <Input name="bio" label="Bio" type="text" placeholder="Fale sobre você" register={register} error={errors.bio}/>
-                        <Input name="contact" label="Contato" type="text" placeholder="Opção de Contato" register={register} error={errors.contact}/>
+                        <Input id="name" label="Nome" type="text" placeholder="Digite aqui seu nome" register={register} error={errors.name}/>
+                        <Input id="email" label="Email" type="text" placeholder="Digite aqui seu email" register={register} error={errors.email}/>
+                        <Input id="password" label="Senha" type="password" placeholder="Digite aqui sua senha" register={register} error={errors.password}/>
+                        <Input id="confirm_password" label="Confirmar Senha" type="password" placeholder="Digite novamente sua senha" register={register} error={errors.confirm_password}/>
+                        <Input id="bio" label="Bio" type="text" placeholder="Fale sobre você" register={register} error={errors.bio}/>
+                        <Input id="contact" label="Contato" type="text" placeholder="Opção de Contato" register={register} error={errors.contact}/>
 
                         <Modules>
                             <Select {...register("course_module")}>

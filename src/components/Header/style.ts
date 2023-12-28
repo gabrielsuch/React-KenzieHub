@@ -1,6 +1,7 @@
 import styled from "styled-components"
 
-export const Container = styled.div `
+
+export const Container = styled.header `
     width: 100%;
     border-bottom: 2px solid var(--color-gray-3);
 `

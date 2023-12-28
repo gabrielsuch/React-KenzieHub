@@ -35,4 +35,8 @@ export const Box = styled.div `
     padding: 20px;
     background-color: var(--color-gray-3);
     border-radius: 4px;
+
+    ul#techs {
+        list-style: none;
+    }
 `

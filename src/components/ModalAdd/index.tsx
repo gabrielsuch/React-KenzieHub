@@ -33,7 +33,7 @@ const ModalAdd = () => {
                 </Header>
                 <Main>
                     <form onSubmit={handleSubmit(submit)}>
-                        <Input type="text" name="title" placeholder="Nome" label="Nome" register={register} error={errors.title}/>
+                        <Input type="text" id="title" placeholder="Nome" label="Nome" register={register} error={errors.title}/>
                         <Select {...register("status")}>
                             {
                                 difficultyOptions.map((option, index) => (

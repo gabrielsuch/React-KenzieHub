@@ -1,4 +1,5 @@
 import {Container, Center, HeaderTech, Title, PlusIcon, Box} from "./style"
+
 import Header from "../../components/Header/index"
 import Profile from "../../components/Profile/index"
 import CardTech from "../../components/CardTech/index"
@@ -35,11 +36,13 @@ const Dashboard = () => {
                         </PlusIcon>
                     </HeaderTech>
                     <Box>
+                        <ul id="techs">
                         {
                             techs.map((tech, index) => (
                                 <CardTech key={index} tech={tech} setSelectedTech={setSelectedTech} setModalOpen={setModalOpen}/>
                             ))
                         }
+                        </ul>
                     </Box>
                 </Center>
             </Container>

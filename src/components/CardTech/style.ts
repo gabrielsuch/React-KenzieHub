@@ -1,7 +1,8 @@
 import styled from "styled-components"
 
-export const OptionBox = styled.div `
-    max-width: 740px;
+
+export const Container = styled.li `
+    width: 100%;
     padding: 20px;
     margin: 10px 0px;
     display: flex;
@@ -16,12 +17,16 @@ export const OptionBox = styled.div `
         transition: 0.5s;
         cursor: pointer;
     }
-`
 
-export const Title = styled.h1 `
-    color: white;
-`
+    .title {
+        h1 {
+            color: #FFFFFF;
+        }
+    }
 
-export const Difficulty = styled.h3 `
-    color: var(--color-gray-3);
+    .status {
+        h3 {
+            color: var(--color-gray-3);
+        }
+    }
 `

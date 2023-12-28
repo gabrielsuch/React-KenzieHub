@@ -38,8 +38,8 @@ const Login = () => {
                 <Register>
                     <Form onSubmit={handleSubmit(submit)}>
                         <Title>Login</Title>
-                        <Input name="email" label="Email" type="text" placeholder="Email" register={register} error={errors.email}/>
-                        <Input name="password" label="Senha" type="password" placeholder="Senha" register={register} error={errors.password}/>
+                        <Input id="email" label="Email" type="text" placeholder="Email" register={register} error={errors.email}/>
+                        <Input id="password" label="Senha" type="password" placeholder="Senha" register={register} error={errors.password}/>
                         <LoginButton type="submit">
                             <h2>Entrar</h2>
                         </LoginButton>

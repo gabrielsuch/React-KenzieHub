@@ -1,21 +1,22 @@
+import {HTMLInputTypeAttribute} from "react"
 import {InputForm, ErrorMessage} from "./style"
-import {FieldError} from "react-hook-form"
+import {UseFormRegister, Path, FieldValues,  FieldError} from "react-hook-form"
 
 
-interface InputProps {
-    name?: string
+interface InputProps<T extends FieldValues> {
+    id: Path<T>
     label?: string
-    type?: string
+    type?: HTMLInputTypeAttribute
     placeholder?: string
-    register: Function
+    register: UseFormRegister<T>
     error?: FieldError | null
 }
 
-const Input = ({name, label, type, placeholder, register, error = null, ...rest}: InputProps) => {
+const Input = <T extends FieldValues> ({id, label, type, placeholder, register, error = null, ...rest}: InputProps<T>) => {
     return (
         <InputForm>
-            <label htmlFor={name}>{label}</label>
-            <input name={name} type={type} placeholder={placeholder} {...register(name)} {...rest}/>
+            <label htmlFor={id}>{label}</label>
+            <input id={id} type={type} placeholder={placeholder} {...register(id)} {...rest}/>
             <ErrorMessage>{error?.message}</ErrorMessage>
         </InputForm>
     )

@@ -1,6 +1,6 @@
 import React from "react"
 
-import {OptionBox, Title, Difficulty} from "./style"
+import {Container} from "./style"
 
 import {TTech} from "../../types/tech.type"
 
@@ -14,17 +14,18 @@ interface TechProps {
 }
 
 const CardTech = ({tech, setSelectedTech, setModalOpen}: TechProps) => {
-
     return (
-        <>
-            <OptionBox onClick={() => {
-                setSelectedTech(tech)
-                setModalOpen("EditTech")
-            }}>
-                <Title>{tech.title}</Title>
-                <Difficulty>{tech.status}</Difficulty>
-            </OptionBox>
-        </>
+        <Container onClick={() => {
+            setSelectedTech(tech)
+            setModalOpen("EditTech")
+        }}>
+            <div className="title">
+                <h1>{tech.title}</h1>
+            </div>
+            <div className="status">
+                <h3>{tech.status}</h3>
+            </div>
+        </Container>
     )
 }
 
