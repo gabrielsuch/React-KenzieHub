@@ -1,10 +1,11 @@
-import {Container, Center, HeaderTech, Title, PlusIcon, Box} from "./style"
+import {Container, HeaderTech, Title, PlusIcon, Box} from "./style"
+import {ContainerCenter} from "../../styles/center"
 
-import Header from "../../components/Header/index"
-import Profile from "../../components/Profile/index"
-import CardTech from "../../components/CardTech/index"
-import ModalAdd from "../../components/ModalAdd/index"
-import ModalEdit from "../../components/ModalEdit/index"
+import {Header} from "../../components/Header/index"
+import {Profile} from "../../components/Profile/index"
+import {CardTech} from "../../components/CardTech/index"
+import {ModalAdd} from "../../components/ModalAdd/index"
+import {ModalEdit} from "../../components/ModalEdit/index"
 
 import {useDashboardContext} from "../../providers/DashboardContext/index"
 import {useTech} from "../../providers/TechContext/index"
@@ -12,7 +13,7 @@ import {useTech} from "../../providers/TechContext/index"
 import {useEffect} from "react"
 
 
-const Dashboard = () => {
+export const Dashboard = () => {
 
     const {modalOpen, setModalOpen} = useDashboardContext()
     const {techs, getTechs, setSelectedTech} = useTech()
@@ -28,7 +29,7 @@ const Dashboard = () => {
             {modalOpen === "AddTech" && <ModalAdd/>}
             {modalOpen === "EditTech" && <ModalEdit/>}
             <Container>
-                <Center>
+                <ContainerCenter>
                     <HeaderTech>
                         <Title>Tecnologias</Title>
                         <PlusIcon onClick={() => setModalOpen("AddTech")}>
@@ -44,10 +45,8 @@ const Dashboard = () => {
                         }
                         </ul>
                     </Box>
-                </Center>
+                </ContainerCenter>
             </Container>
         </>
     )
 }
-
-export default Dashboard

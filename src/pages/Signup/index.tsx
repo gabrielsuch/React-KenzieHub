@@ -1,6 +1,6 @@
 import {Container, Header, Box, Register, Form, Title, RegisterButton, Modules, Select, ErrorMessage} from "./style"
 
-import Input from "../../components/Input/index"
+import {Input} from "../../components/Input/index"
 
 import {useAuth} from "../../providers/AuthContext/index"
 
@@ -13,7 +13,7 @@ import {TCreateUser} from "../../types/user.type"
 import {useHistory} from "react-router-dom"
 
 
-const Signup = () => {
+export const Signup = () => {
 
     const history = useHistory()
 
@@ -74,5 +74,3 @@ const Signup = () => {
         </Container>
     )
 }
-
-export default Signup

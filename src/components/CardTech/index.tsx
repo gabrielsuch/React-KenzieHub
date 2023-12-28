@@ -13,7 +13,7 @@ interface TechProps {
     setModalOpen: React.Dispatch<React.SetStateAction<Modal>>
 }
 
-const CardTech = ({tech, setSelectedTech, setModalOpen}: TechProps) => {
+export const CardTech = ({tech, setSelectedTech, setModalOpen}: TechProps) => {
     return (
         <Container onClick={() => {
             setSelectedTech(tech)
@@ -28,5 +28,3 @@ const CardTech = ({tech, setSelectedTech, setModalOpen}: TechProps) => {
         </Container>
     )
 }
-
-export default CardTech

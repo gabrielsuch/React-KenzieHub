@@ -1,5 +1,5 @@
 import {GlobalStyle} from "./styles/global"
-import Route from "./routes/index"
+import {Routes} from "./routes/index"
 
 import {ToastContainer} from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css'
@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css'
 const App = () => {
   return (
     <div className="App">
-      <Route/>
+      <Routes/>
       <GlobalStyle/>
       <ToastContainer 
         position="top-center"

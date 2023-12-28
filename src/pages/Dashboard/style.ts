@@ -5,11 +5,6 @@ export const Container = styled.div `
     height: 80vh;
 `
 
-export const Center = styled.div `
-    max-width: 780px;
-    margin: auto;
-`
-
 export const HeaderTech = styled.div `
     padding: 20px;
     display: flex;

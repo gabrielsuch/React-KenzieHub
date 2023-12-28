@@ -10,7 +10,7 @@ import {useDashboardContext} from "../../providers/DashboardContext/index"
 import {useTech} from "../../providers/TechContext/index"
 
 
-const ModalEdit = () => {
+export const ModalEdit = () => {
     
     const {setModalOpen} = useDashboardContext()
     const {difficultyOptions, deleteTech, updateTech, selectedTech} = useTech()
@@ -50,5 +50,3 @@ const ModalEdit = () => {
         </>
     )
 }
-
-export default ModalEdit

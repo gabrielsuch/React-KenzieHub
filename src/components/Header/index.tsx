@@ -1,18 +1,23 @@
-import {Container, Center, Title} from "./style"
+import {Container} from "./style"
+import {ContainerCenter} from "../../styles/center"
+
 import {useAuth} from "../../providers/AuthContext/index"
 
-const Header = () => {
+
+export const Header = () => {
 
     const {logout} = useAuth()
 
     return (
         <Container>
-            <Center>
-                <Title>Kenzie Hub</Title>
-                <button onClick={() => logout()}>Sair</button>
-            </Center>
+            <ContainerCenter>
+                <div className="title">
+                    <h1>Kenzie Hub</h1>
+                </div>
+                <div className="containerButton">
+                    <button type="button" onClick={() => logout()}>Sair</button>
+                </div>
+            </ContainerCenter>
         </Container>
     )
 }
-
-export default Header

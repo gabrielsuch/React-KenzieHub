@@ -1,5 +1,6 @@
 import {Container, Header, Main, Select, ShowOnlyContainer} from "./style"
-import Input from "../Input/index"
+
+import {Input} from "../Input/index"
 
 import {useForm} from "react-hook-form"
 import {yupResolver} from "@hookform/resolvers/yup"
@@ -11,7 +12,7 @@ import {useDashboardContext} from "../../providers/DashboardContext/index"
 import {useTech} from "../../providers/TechContext/index"
 
 
-const ModalAdd = () => {
+export const ModalAdd = () => {
 
     const {setModalOpen} = useDashboardContext()
     const {difficultyOptions, createTech} = useTech()
@@ -49,5 +50,3 @@ const ModalAdd = () => {
         </>
     )
 }
-
-export default ModalAdd

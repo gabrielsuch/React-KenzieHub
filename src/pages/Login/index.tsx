@@ -1,6 +1,6 @@
 import {Container, Header, Box, Form, Register, Title, LoginButton, CreateAccount, RegisterButton} from "./style"
 
-import Input from "../../components/Input/index"
+import {Input} from "../../components/Input/index"
 
 import {useHistory} from "react-router-dom"
 
@@ -13,7 +13,7 @@ import {TLogin} from "../../types/user.type"
 import {useAuth} from "../../providers/AuthContext/index"
 
 
-const Login = () => {
+export const Login = () => {
 
     const {login} = useAuth()
 
@@ -55,5 +55,3 @@ const Login = () => {
         </Container>
     )
 }
-
-export default Login

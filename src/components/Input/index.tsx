@@ -12,7 +12,7 @@ interface InputProps<T extends FieldValues> {
     error?: FieldError | null
 }
 
-const Input = <T extends FieldValues> ({id, label, type, placeholder, register, error = null, ...rest}: InputProps<T>) => {
+export const Input = <T extends FieldValues> ({id, label, type, placeholder, register, error = null, ...rest}: InputProps<T>) => {
     return (
         <InputForm>
             <label htmlFor={id}>{label}</label>
@@ -21,5 +21,3 @@ const Input = <T extends FieldValues> ({id, label, type, placeholder, register, 
         </InputForm>
     )
 }
-
-export default Input
