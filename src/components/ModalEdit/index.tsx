@@ -1,32 +1,23 @@
 import {Container, ShowOnlyContainer, Header, Main, Select, Actions, SaveButton, DeleteButton} from "./style"
 
-import * as yup from "yup"
 import {useForm} from "react-hook-form"
 import {yupResolver} from "@hookform/resolvers/yup"
 
-import {useTech} from "../../providers/TechContext/index"
+import {updateTechSchema} from "../../schemas/tech.schema"
+import {TUpdateTech} from "../../types/tech.type"
 
- 
-interface Schema {
-    title: string
-    status: string
-}
+import {useTech} from "../../providers/TechContext/index"
 
 
 const ModalEdit = () => {
     
     const {deleteTech, updateTech, closeEditState, actualEditTech} = useTech()
 
-    const schema = yup.object().shape({
-        title: yup.string().optional(),
-        status: yup.string().optional()
+    const {register, handleSubmit} = useForm<TUpdateTech>({
+        resolver: yupResolver(updateTechSchema)
     })
 
-    const {register, handleSubmit} = useForm<Schema>({
-        resolver: yupResolver(schema)
-    })
-
-    const handleClick = (data: Schema) => {
+    const handleClick = (data: TUpdateTech) => {
         updateTech(actualEditTech, data)
     }
 

@@ -3,25 +3,12 @@ import {useHistory} from "react-router-dom"
 
 import api from "../../services/api"
 
+import {TCreateUser, TLogin} from "../../types/user.type"
+
 import {toast} from "react-toastify"
 
 interface ChildrenProps {
     children: ReactNode
-}
-
-interface RegisterProps {
-    name: string
-    email: string
-    password: string
-    confirm_password: string
-    course_module: string
-    bio: string
-    contact: string
-}
-
-interface LoginProps {
-    email: string
-    password: string
 }
 
 interface DataProps {
@@ -44,10 +31,10 @@ interface UserProps {
 }
 
 interface ContextData {
-    createRegister: (data: RegisterProps) => void
-    login: (data: LoginProps) => void
     token: string
     user: UserProps
+    createRegister: (data: TCreateUser) => void
+    login: (data: TLogin) => void
     logout: () => void
 }
 
@@ -71,7 +58,7 @@ export const AuthProvider = ({children}: ChildrenProps) => {
         return {} as DataProps
     })
 
-    const createRegister = (data: RegisterProps) => {
+    const createRegister = (data: TCreateUser) => {
         const {confirm_password, ...newData} = data
         
         api.post("/users", newData)
@@ -87,29 +74,26 @@ export const AuthProvider = ({children}: ChildrenProps) => {
         })
     }
 
-    const login = (data: LoginProps) => {
-        api.post("/sessions", data)
-        .then((response) => {
-            
+    const login = async (data: TLogin): Promise<void> => {
+        try {
+            const response = await api.post("/sessions", data)
+
             const token = response.data.token
             const user = response.data.user
 
-            toast.success(`Seja Bem-vindo, ${user.name}`)
-
             localStorage.setItem("@KenzieHub:token", token)
             localStorage.setItem("@KenzieHub:user", JSON.stringify(user))
-
+            
             setData({token, user})
             history.push("/dashboard")
-        })
-        .catch((err) => {
-            toast.error("Dados incorretos. Verifique os campos novamente.")
+            toast.success(`Seja Bem-vindo, ${user.name}`)
 
-            console.log(err)
-        })
+        } catch(_) {
+            toast.error("Erro no Login")
+        }
     }
 
-    const logout = () => {
+    const logout = (): void => {
         localStorage.removeItem("@KenzieHub:token")
         localStorage.removeItem("@KenzieHub:user")
         localStorage.clear()
@@ -120,7 +104,7 @@ export const AuthProvider = ({children}: ChildrenProps) => {
 
     
     return (
-        <AuthContext.Provider value={{createRegister, login, token: data.token, user: data.user, logout}}>
+        <AuthContext.Provider value={{token: data.token, user: data.user, createRegister, login, logout}}>
             {children}
         </AuthContext.Provider>
     )

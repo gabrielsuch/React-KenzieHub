@@ -4,22 +4,14 @@ import Input from "../../components/Input/index"
 
 import {useAuth} from "../../providers/AuthContext/index"
 
-import * as yup from "yup"
 import {useForm} from "react-hook-form"
 import {yupResolver} from "@hookform/resolvers/yup"
 
+import {createUserSchema} from "../../schemas/user.schema"
+import {TCreateUser} from "../../types/user.type"
+
 import {useHistory} from "react-router-dom"
 
-
-interface SignupProps {
-    name: string
-    email: string
-    password: string
-    confirm_password: string
-    course_module: string
-    bio: string
-    contact: string
-}
 
 const Signup = () => {
 
@@ -29,21 +21,11 @@ const Signup = () => {
 
     const modules = ["Primeiro Módulo", "Segundo Módulo", "Terceiro Módulo", "Quarto Módulo"]
 
-    const schema = yup.object().shape({
-        name: yup.string().required("Campo Obrigatório"),
-        email: yup.string().required("Campo Obrigatório").email("Email Inválido"),
-        password: yup.string().required("Campo Obrigatório"),
-        confirm_password: yup.string().required("Campo Obrigatório").oneOf([yup.ref("password")], "Senhas Diferentes"),
-        course_module: yup.string().required("Campo Obrigatório"),
-        bio: yup.string().required("Campo Obrigatório"),
-        contact: yup.string().required("Campo Obrigatório")
-    })
-
-    const {register, handleSubmit, formState: {errors}} = useForm<SignupProps>({
-        resolver: yupResolver(schema)
+    const {register, handleSubmit, formState: {errors}} = useForm<TCreateUser>({
+        resolver: yupResolver(createUserSchema)
     })
     
-    const submit = (data: SignupProps) => {
+    const submit = (data: TCreateUser) => {
         createRegister(data)
     }
 

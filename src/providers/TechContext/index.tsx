@@ -2,6 +2,8 @@ import {createContext, useContext, ReactNode, useState} from "react"
 
 import api from "../../services/api"
 
+import {TCreateTech, TUpdateTech} from "../../types/tech.type"
+
 import {useAuth} from "../AuthContext/index"
 
 import {toast} from "react-toastify"
@@ -19,12 +21,6 @@ interface Tech {
     updated_at: string
 }
 
-interface PropsTitleStatus{
-    title: string
-    status: string
-}
-
-
 interface ContextData {
     actualEditTech: Tech
     openModal: boolean
@@ -34,10 +30,10 @@ interface ContextData {
     openModalState: () => void
     closeModalState: () => void
     closeEditState: () => void
-    addTech: (data: Tech) => void
+    addTech: (data: TCreateTech) => void
     getTechs: () => void
     deleteTech: (tech: Tech) => void
-    updateTech: (tech: Tech, data: PropsTitleStatus) => void
+    updateTech: (tech: Tech, data: TUpdateTech) => void
     
 }
 
@@ -81,7 +77,7 @@ export const TechProvider = ({children}: ChildrenProps) => {
         })
     }
 
-    const addTech = (data: Tech) => {
+    const addTech = (data: TCreateTech) => {
         api.post("/users/techs/", data, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -99,7 +95,7 @@ export const TechProvider = ({children}: ChildrenProps) => {
         })
     }
 
-    const updateTech = (tech: Tech, data: PropsTitleStatus) => {
+    const updateTech = (tech: Tech, data: TUpdateTech) => {
         api.put(`/users/techs/${tech.id}`, data, {
             headers: {
                 Authorization: `Bearer ${token}`

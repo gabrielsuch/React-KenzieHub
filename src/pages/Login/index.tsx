@@ -4,16 +4,14 @@ import Input from "../../components/Input/index"
 
 import {useHistory} from "react-router-dom"
 
-import * as yup from "yup"
 import {useForm} from "react-hook-form"
 import {yupResolver} from "@hookform/resolvers/yup"
 
+import {loginSchema} from "../../schemas/user.schema"
+import {TLogin} from "../../types/user.type"
+
 import {useAuth} from "../../providers/AuthContext/index"
 
-interface LoginProps {
-    email: string
-    password: string
-}
 
 const Login = () => {
 
@@ -21,16 +19,11 @@ const Login = () => {
 
     const history = useHistory()
 
-    const schema = yup.object().shape({
-        email: yup.string().required("Campo Obrigatório").email("Email Inválido"),
-        password: yup.string().required("Campo Obrigatório")
+    const {register, handleSubmit, formState: {errors}} = useForm<TLogin>({
+        resolver: yupResolver(loginSchema)
     })
 
-    const {register, handleSubmit, formState: {errors}} = useForm<LoginProps>({
-        resolver: yupResolver(schema)
-    })
-
-    const submit = (data: LoginProps) => {
+    const submit = (data: TLogin) => {
         login(data)
     }
 
