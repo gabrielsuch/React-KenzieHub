@@ -12,17 +12,15 @@ import {useTech} from "../../providers/TechContext/index"
 
 const ModalAdd = () => {
 
-    const {addTech, closeModalState} = useTech()
+    const {difficultyOptions, createTech, closeModalState} = useTech()
 
     const {register, handleSubmit, formState: {errors}} = useForm<TCreateTech>({
         resolver: yupResolver(createTechSchema)
     })
 
-    const submit = (data: TCreateTech) => {
-        addTech(data)
+    const submit = async (data: TCreateTech) => {
+        await createTech(data)
     }
-
-    const options = ["Iniciante", "Intermediário", "Avançado"]
 
     return (
         <>
@@ -36,7 +34,7 @@ const ModalAdd = () => {
                         <Input type="text" name="title" placeholder="Nome" label="Nome" register={register} error={errors.title}/>
                         <Select {...register("status")}>
                             {
-                                options.map((option, index) => (
+                                difficultyOptions.map((option, index) => (
                                     <option key={index}>{option}</option>
                                     ))
                                 }

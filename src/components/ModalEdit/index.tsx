@@ -11,17 +11,15 @@ import {useTech} from "../../providers/TechContext/index"
 
 const ModalEdit = () => {
     
-    const {deleteTech, updateTech, closeEditState, actualEditTech} = useTech()
+    const {difficultyOptions, deleteTech, updateTech, closeEditState, actualEditTech} = useTech()
 
     const {register, handleSubmit} = useForm<TUpdateTech>({
         resolver: yupResolver(updateTechSchema)
     })
 
-    const handleClick = (data: TUpdateTech) => {
-        updateTech(actualEditTech, data)
+    const handleClick = async (data: TUpdateTech) => {
+        await updateTech(actualEditTech.id, data)
     }
-
-    const options = ["Iniciante", "Intermediário", "Avançado"]
 
     return (
         <>
@@ -34,14 +32,14 @@ const ModalEdit = () => {
                     <form onSubmit={handleSubmit(handleClick)}>
                         <Select {...register("status")}>
                             {
-                                options.map((option, index) => (
+                                difficultyOptions.map((option, index) => (
                                     <option key={index}>{option}</option>
                                 ))
                             }
                         </Select>
                         <Actions>
                             <SaveButton type="submit">Salvar Alterações</SaveButton>
-                            <DeleteButton type="button" onClick={() => deleteTech(actualEditTech)}>Excluir</DeleteButton>
+                            <DeleteButton type="button" onClick={() => deleteTech(actualEditTech.id)}>Excluir</DeleteButton>
                         </Actions>
                     </form>
                 </Main>

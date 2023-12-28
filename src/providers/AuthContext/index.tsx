@@ -1,7 +1,7 @@
 import {createContext, useContext, ReactNode, useState} from "react"
 import {useHistory} from "react-router-dom"
 
-import api from "../../services/api"
+import {api} from "../../services/api"
 
 import {TCreateUser, TLogin} from "../../types/user.type"
 
@@ -33,8 +33,8 @@ interface UserProps {
 interface ContextData {
     token: string
     user: UserProps
-    createRegister: (data: TCreateUser) => void
-    login: (data: TLogin) => void
+    createRegister: (data: TCreateUser) => Promise<void>
+    login: (data: TLogin) => Promise<void>
     logout: () => void
 }
 
@@ -58,20 +58,19 @@ export const AuthProvider = ({children}: ChildrenProps) => {
         return {} as DataProps
     })
 
-    const createRegister = (data: TCreateUser) => {
+    const createRegister = async (data: TCreateUser): Promise<void> => {
         const {confirm_password, ...newData} = data
-        
-        api.post("/users", newData)
-        .then((_) => {
+
+        try {
+            await api.post("/users", newData)
+
             toast.success("Conta Criada com Sucesso!")
 
             history.push("/")
-        })
-        .catch((err) => {
-            toast.error("Erro na Criação da Conta. Possivelmente este email já existe, ou a senha está fraca.")
 
-            console.log(err)
-        })
+        } catch(_) {
+            toast.error("Erro na Criação da Conta")
+        }
     }
 
     const login = async (data: TLogin): Promise<void> => {
