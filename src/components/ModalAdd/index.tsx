@@ -7,12 +7,14 @@ import {yupResolver} from "@hookform/resolvers/yup"
 import {createTechSchema} from "../../schemas/tech.schema"
 import {TCreateTech} from "../../types/tech.type"
 
+import {useDashboardContext} from "../../providers/DashboardContext/index"
 import {useTech} from "../../providers/TechContext/index"
 
 
 const ModalAdd = () => {
 
-    const {difficultyOptions, createTech, closeModalState} = useTech()
+    const {setModalOpen} = useDashboardContext()
+    const {difficultyOptions, createTech} = useTech()
 
     const {register, handleSubmit, formState: {errors}} = useForm<TCreateTech>({
         resolver: yupResolver(createTechSchema)
@@ -27,7 +29,7 @@ const ModalAdd = () => {
             <Container>
                 <Header>
                     <h1>Cadastrar Tecnologia</h1>
-                    <button onClick={() => closeModalState()}>X</button>
+                    <button onClick={() => setModalOpen("None")}>X</button>
                 </Header>
                 <Main>
                     <form onSubmit={handleSubmit(submit)}>
@@ -43,7 +45,7 @@ const ModalAdd = () => {
                     </form>
                 </Main>
             </Container>
-            <ShowOnlyContainer onClick={() => closeModalState()}/>
+            <ShowOnlyContainer onClick={() => setModalOpen("None")}/>
         </>
     )
 }

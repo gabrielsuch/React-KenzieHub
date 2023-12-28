@@ -1,26 +1,26 @@
+import React from "react"
+
 import {OptionBox, Title, Difficulty} from "./style"
 
-import {useTech} from "../../providers/TechContext/index"
+import {TTech} from "../../types/tech.type"
 
-interface Props {
-    id: string
-    title: string
-    status: string
-    created_at: string
-    updated_at: string
-}
+import {Modal} from "../../providers/DashboardContext/index"
+
 
 interface TechProps {
-    tech: Props
+    tech: TTech
+    setSelectedTech: React.Dispatch<React.SetStateAction<TTech>>
+    setModalOpen: React.Dispatch<React.SetStateAction<Modal>>
 }
 
-const CardTech = ({tech}: TechProps) => {
-
-    const {openEditState} = useTech()
+const CardTech = ({tech, setSelectedTech, setModalOpen}: TechProps) => {
 
     return (
         <>
-            <OptionBox onClick={() => openEditState(tech)}>
+            <OptionBox onClick={() => {
+                setSelectedTech(tech)
+                setModalOpen("EditTech")
+            }}>
                 <Title>{tech.title}</Title>
                 <Difficulty>{tech.status}</Difficulty>
             </OptionBox>

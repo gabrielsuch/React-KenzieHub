@@ -5,6 +5,7 @@ import CardTech from "../../components/CardTech/index"
 import ModalAdd from "../../components/ModalAdd/index"
 import ModalEdit from "../../components/ModalEdit/index"
 
+import {useDashboardContext} from "../../providers/DashboardContext/index"
 import {useTech} from "../../providers/TechContext/index"
 
 import {useEffect} from "react"
@@ -12,7 +13,8 @@ import {useEffect} from "react"
 
 const Dashboard = () => {
 
-    const {techs, getTechs, openModalState, openModal, openEdit} = useTech()
+    const {modalOpen, setModalOpen} = useDashboardContext()
+    const {techs, getTechs, setSelectedTech} = useTech()
 
     useEffect(() => {
         getTechs()
@@ -22,26 +24,20 @@ const Dashboard = () => {
         <>
             <Header/>
             <Profile/>
-            {
-                openModal &&
-                <ModalAdd/>
-            }
-            {
-                openEdit &&
-                <ModalEdit/>
-            }
+            {modalOpen === "AddTech" && <ModalAdd/>}
+            {modalOpen === "EditTech" && <ModalEdit/>}
             <Container>
                 <Center>
                     <HeaderTech>
                         <Title>Tecnologias</Title>
-                        <PlusIcon onClick={() => openModalState()}>
+                        <PlusIcon onClick={() => setModalOpen("AddTech")}>
                             <Title>+</Title>
                         </PlusIcon>
                     </HeaderTech>
                     <Box>
                         {
                             techs.map((tech, index) => (
-                                <CardTech key={index} tech={tech}/>
+                                <CardTech key={index} tech={tech} setSelectedTech={setSelectedTech} setModalOpen={setModalOpen}/>
                             ))
                         }
                     </Box>

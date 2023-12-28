@@ -6,19 +6,21 @@ import {yupResolver} from "@hookform/resolvers/yup"
 import {updateTechSchema} from "../../schemas/tech.schema"
 import {TUpdateTech} from "../../types/tech.type"
 
+import {useDashboardContext} from "../../providers/DashboardContext/index"
 import {useTech} from "../../providers/TechContext/index"
 
 
 const ModalEdit = () => {
     
-    const {difficultyOptions, deleteTech, updateTech, closeEditState, actualEditTech} = useTech()
+    const {setModalOpen} = useDashboardContext()
+    const {difficultyOptions, deleteTech, updateTech, selectedTech} = useTech()
 
     const {register, handleSubmit} = useForm<TUpdateTech>({
         resolver: yupResolver(updateTechSchema)
     })
 
     const handleClick = async (data: TUpdateTech) => {
-        await updateTech(actualEditTech.id, data)
+        await updateTech(selectedTech.id, data)
     }
 
     return (
@@ -26,7 +28,7 @@ const ModalEdit = () => {
             <Container>
                 <Header>
                     <h2>Tecnologia Detalhes</h2>
-                    <button onClick={() => closeEditState()}>X</button>
+                    <button onClick={() => setModalOpen("None")}>X</button>
                 </Header>
                 <Main>
                     <form onSubmit={handleSubmit(handleClick)}>
@@ -39,12 +41,12 @@ const ModalEdit = () => {
                         </Select>
                         <Actions>
                             <SaveButton type="submit">Salvar Alterações</SaveButton>
-                            <DeleteButton type="button" onClick={() => deleteTech(actualEditTech.id)}>Excluir</DeleteButton>
+                            <DeleteButton type="button" onClick={async() => await deleteTech(selectedTech.id)}>Excluir</DeleteButton>
                         </Actions>
                     </form>
                 </Main>
             </Container>
-            <ShowOnlyContainer onClick={() => closeEditState()}/>
+            <ShowOnlyContainer onClick={() => setModalOpen("None")}/>
         </>
     )
 }

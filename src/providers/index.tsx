@@ -1,17 +1,23 @@
+import {ReactNode} from "react"
+
+import {DashboardContextProvider} from "./DashboardContext/index"
 import {AuthProvider} from "./AuthContext/index"
 import {TechProvider} from "./TechContext/index"
-import {ReactNode} from "react"
+
 
 interface ChildrenProps {
     children: ReactNode
 }
 
+
 export const Providers = ({children}: ChildrenProps) => {
     return (
-        <AuthProvider>
-            <TechProvider>
-                {children}
-            </TechProvider>
-        </AuthProvider>
+        <DashboardContextProvider>
+            <AuthProvider>
+                <TechProvider>
+                    {children}
+                </TechProvider>
+            </AuthProvider>
+        </DashboardContextProvider>
     )
 }

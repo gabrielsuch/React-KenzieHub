@@ -1,9 +1,11 @@
 import {createContext, useContext, ReactNode, useState} from "react"
 
+import {AxiosResponse} from "axios"
 import {api} from "../../services/api"
 
-import {TCreateTech, TUpdateTech} from "../../types/tech.type"
+import {TTech, TCreateTech, TUpdateTech} from "../../types/tech.type"
 
+import {useDashboardContext} from "../DashboardContext/index"
 import {useAuth} from "../AuthContext/index"
 
 import {toast} from "react-toastify"
@@ -13,29 +15,15 @@ interface ChildrenProps {
     children: ReactNode
 }
 
-interface Tech {
-    id: string
-    title: string
-    status: string
-    created_at: string
-    updated_at: string
-}
-
 interface ContextData {
-    actualEditTech: Tech
-    openModal: boolean
-    openEdit: boolean
-    techs: Tech[]
     difficultyOptions: readonly string[]
-    openEditState: (tech: Tech) => void
-    openModalState: () => void
-    closeModalState: () => void
-    closeEditState: () => void
+    selectedTech: TTech
+    techs: TTech[]
     getTechs: () => Promise<void>
     createTech: (data: TCreateTech) => Promise<void>
     updateTech: (id: string, data: TUpdateTech) => Promise<void>
     deleteTech: (id: string) => Promise<void>
-    
+    setSelectedTech: React.Dispatch<React.SetStateAction<TTech>>
 }
 
 
@@ -43,33 +31,15 @@ const TechContext = createContext<ContextData>({} as ContextData)
 
 export const TechProvider = ({children}: ChildrenProps) => {
 
+    const {setModalOpen} = useDashboardContext()
     const {token, user} = useAuth()
 
-    const [techs, setTechs] = useState<Tech[]>([])
-    const [openModal, setOpenModal] = useState<boolean>(false)
-    const [openEdit, setOpenEdit] = useState<boolean>(false)
+    const [techs, setTechs] = useState<TTech[]>([])
 
-    const [actualEditTech, setActualEditTech] = useState({} as Tech)
+    const [selectedTech, setSelectedTech] = useState({} as TTech)
 
     const difficultyOptions: readonly string[] = ["Iniciante", "Intermediário", "Avançado"]
 
-
-    const closeModalState = () => {
-        setOpenModal(false)
-    }
-
-    const openModalState = () => {
-        setOpenModal(true)
-    }
-
-    const closeEditState = () => {
-        setOpenEdit(false)
-    }
-
-    const openEditState = (tech: Tech) => {
-        setOpenEdit(true)
-        setActualEditTech(tech)
-    }
 
     const getTechs = async (): Promise<void> => {
         try {
@@ -84,17 +54,17 @@ export const TechProvider = ({children}: ChildrenProps) => {
 
     const createTech = async (data: TCreateTech): Promise<void> => {
         try {
-            const response = await api.post("/users/techs", data, {
+            const response: AxiosResponse<TTech> = await api.post("/users/techs", data, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             })
 
+            setTechs([...techs, response.data])
+            setModalOpen("None")
+
             toast.success("Tecnologia Criada!")
 
-            // MUDAR ESSA LOGICA ABAIXO \/
-            getTechs()
-            closeModalState()
             
         } catch(err) {
             console.error(err)
@@ -104,14 +74,17 @@ export const TechProvider = ({children}: ChildrenProps) => {
 
     const updateTech = async (id: string, data: TUpdateTech): Promise<void> => {
         try {
-            const response = await api.put(`/users/techs/${id}`, data, {
+            const response: AxiosResponse<Omit<TTech, "user">> = await api.put(`/users/techs/${id}`, data, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             })
 
-            getTechs()
-            closeEditState()
+            const tech = techs.findIndex(currentTech => currentTech.id === id)
+
+            Object.assign(techs[tech], response.data)
+
+            setModalOpen("None")
 
         } catch(err) {
             console.error(err)
@@ -126,8 +99,9 @@ export const TechProvider = ({children}: ChildrenProps) => {
                 }
             })
 
-            getTechs()
-            closeEditState()
+            setTechs(techs.filter(tech => tech.id !== id))
+
+            setModalOpen("None")
 
         } catch(err) {
             console.error(err)
@@ -135,7 +109,7 @@ export const TechProvider = ({children}: ChildrenProps) => {
     }
 
     return (
-        <TechContext.Provider value={{actualEditTech, openModal, openEdit, techs, difficultyOptions, openEditState, openModalState, closeModalState, closeEditState,  getTechs, createTech, updateTech, deleteTech}}>
+        <TechContext.Provider value={{selectedTech, techs, difficultyOptions,  getTechs, createTech, updateTech, deleteTech, setSelectedTech}}>
             {children}
         </TechContext.Provider>
     )
