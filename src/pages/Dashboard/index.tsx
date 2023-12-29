@@ -1,3 +1,5 @@
+import {useEffect} from "react"
+
 import {Container, Box} from "./style"
 import {ContainerCenter} from "../../styles/center"
 
@@ -9,8 +11,6 @@ import {ModalEditTech} from "../../components/Tech/Modal/Edit/index"
 
 import {useDashboardContext} from "../../providers/DashboardContext/index"
 import {useTech} from "../../providers/TechContext/index"
-
-import {useEffect} from "react"
 
 
 export const Dashboard = () => {
