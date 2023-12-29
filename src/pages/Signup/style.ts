@@ -19,13 +19,13 @@ export const Header = styled.header `
     align-items: center;
     margin: 30px 0px;
 
-    .headerTitle {
+    #headerTitle {
         h1 {
             color: var(--color-primary);
         }
     }
 
-    .backButton {
+    #containerBackButton {
         border-radius: 4px;
         padding: 10px;
         background-color: var(--color-gray-3);
@@ -77,7 +77,7 @@ export const Box = styled.div `
             }
         }
 
-        .containerButton {
+        #containerButton {
             button {
                 width: 100%;
                 padding: 22px;

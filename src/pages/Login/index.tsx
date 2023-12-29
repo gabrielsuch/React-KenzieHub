@@ -1,4 +1,4 @@
-import {Container, Header, Box, Form, Register, Title, LoginButton, CreateAccount, RegisterButton} from "./style"
+import {Container, Header, Box} from "./style"
 
 import {Input} from "../../components/Input/index"
 
@@ -30,27 +30,27 @@ export const Login = () => {
     return (
         <Container>
             <Header>
-                <div className="headerTitle">
+                <div id="headerTitle">
                     <h1>Kenzie Hub</h1>
                 </div>
             </Header>
             <Box>
-                <Register>
-                    <Form onSubmit={handleSubmit(onSubmit)}>
-                        <Title>Login</Title>
-                        <Input id="email" label="Email" type="text" placeholder="Email" register={register} error={errors.email}/>
-                        <Input id="password" label="Senha" type="password" placeholder="Senha" register={register} error={errors.password}/>
-                        <LoginButton type="submit">
-                            <h2>Entrar</h2>
-                        </LoginButton>
-                        <CreateAccount>
-                            <h3>Ainda não possui uma conta?</h3>
-                        </CreateAccount>
-                    </Form>
-                    <RegisterButton onClick={() => history.push("/signup")}>
-                        <h2>Cadastrar</h2>
-                    </RegisterButton>
-                </Register>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <div id="title">
+                        <h1>Login</h1>
+                    </div>
+                    <Input id="email" label="Email" type="text" placeholder="Email" register={register} error={errors.email}/>
+                    <Input id="password" label="Senha" type="password" placeholder="Senha" register={register} error={errors.password}/>
+                    <div id="containerButton">
+                        <button type="submit">Entrar</button>
+                    </div>
+                    <div id="containerMessage">
+                        <h3>Ainda não possui uma conta?</h3>
+                    </div>
+                </form>
+                <div id="containerRegister">
+                    <button type="button" onClick={() => history.push("/signup")}>Cadastrar</button>
+                </div>
             </Box>
         </Container>
     )

@@ -32,11 +32,11 @@ export const Signup = () => {
     return (
         <Container>
             <Header>
-                <div className="headerTitle">
+                <div id="headerTitle">
                     <h1>Kenzie Hub</h1>
                 </div>
-                <div className="backButton" onClick={() => history.push("/")}>
-                    <button>Voltar</button>
+                <div id="containerBackButton">
+                    <button type="button" onClick={() => history.push("/")}>Voltar</button>
                 </div>
             </Header>
             <Box>
@@ -64,7 +64,7 @@ export const Signup = () => {
                         </select>
                     </div>
                     <ErrorMessage>{errors.course_module?.message}</ErrorMessage>
-                    <div className="containerButton">
+                    <div id="containerButton">
                         <button type="submit">Cadastrar</button>
                     </div>
                 </form>
