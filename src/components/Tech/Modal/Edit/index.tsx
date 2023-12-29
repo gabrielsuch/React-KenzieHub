@@ -1,4 +1,4 @@
-import {Container, ShowOnlyContainer, Header, Main, Select, Actions, SaveButton, DeleteButton} from "./style"
+import {Container, Box, ShowOnlyModal} from "../style"
 
 import {useForm} from "react-hook-form"
 import {yupResolver} from "@hookform/resolvers/yup"
@@ -26,27 +26,35 @@ export const ModalEditTech = () => {
     return (
         <>
             <Container>
-                <Header>
-                    <h2>Tecnologia Detalhes</h2>
-                    <button onClick={() => setModalOpen("None")}>X</button>
-                </Header>
-                <Main>
+                <div className="headerTech">
+                    <div className="headerTitle">
+                        <h2>Tecnologia Detalhes</h2>
+                    </div>
+                    <div className="headerClose">
+                        <button onClick={() => setModalOpen("None")}>X</button>
+                    </div>
+                </div>
+                <Box>
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        <Select {...register("status")}>
-                            {
-                                difficultyOptions.map((option, index) => (
-                                    <option key={index}>{option}</option>
-                                ))
-                            }
-                        </Select>
-                        <Actions>
-                            <SaveButton type="submit">Salvar Alterações</SaveButton>
-                            <DeleteButton type="button" onClick={async() => await deleteTech(selectedTech.id)}>Excluir</DeleteButton>
-                        </Actions>
+                        <select {...register("status")}>
+                        {
+                            difficultyOptions.map((option, index) => (
+                                <option key={index}>{option}</option>
+                            ))
+                        }
+                        </select>
+                        <div className="containerButtons">
+                            <div id="containerSave">
+                                <button type="submit">Salvar Alterações</button>
+                            </div>
+                            <div id="containerDelete">
+                                <button type="button" onClick={async() => await deleteTech(selectedTech.id)}>Excluir</button>
+                            </div>
+                        </div>
                     </form>
-                </Main>
+                </Box>
             </Container>
-            <ShowOnlyContainer onClick={() => setModalOpen("None")}/>
+            <ShowOnlyModal onClick={() => setModalOpen("None")}/>
         </>
     )
 }

@@ -26,8 +26,6 @@ export const Dashboard = () => {
         <>
             <Header/>
             <Profile/>
-            {modalOpen === "AddTech" && <ModalAddTech/>}
-            {modalOpen === "EditTech" && <ModalEditTech/>}
             <Container>
                 <ContainerCenter>
                     <div id="headerTech">
@@ -51,6 +49,8 @@ export const Dashboard = () => {
                     </Box>
                 </ContainerCenter>
             </Container>
+            {modalOpen === "AddTech" && <ModalAddTech/>}
+            {modalOpen === "EditTech" && <ModalEditTech/>}
         </>
     )
 }
