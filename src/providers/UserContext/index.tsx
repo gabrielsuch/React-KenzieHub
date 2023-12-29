@@ -33,7 +33,7 @@ interface UserProps {
 interface ContextData {
     token: string
     user: UserProps
-    createRegister: (data: TCreateUser) => Promise<void>
+    createUser: (data: TCreateUser) => Promise<void>
     login: (data: TLogin) => Promise<void>
     logout: () => void
 }
@@ -58,7 +58,7 @@ export const UserContextProvider = ({children}: ChildrenProps) => {
         return {} as AuthProps
     })
 
-    const createRegister = async (data: TCreateUser): Promise<void> => {
+    const createUser = async (data: TCreateUser): Promise<void> => {
         const {confirm_password, ...newData} = data
 
         try {
@@ -103,7 +103,7 @@ export const UserContextProvider = ({children}: ChildrenProps) => {
 
     
     return (
-        <UserContext.Provider value={{token: auth.token, user: auth.user, createRegister, login, logout}}>
+        <UserContext.Provider value={{token: auth.token, user: auth.user, createUser, login, logout}}>
             {children}
         </UserContext.Provider>
     )

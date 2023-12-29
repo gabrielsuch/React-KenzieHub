@@ -47,23 +47,23 @@ export const Box = styled.div `
     padding: 42px 22px;
     margin: 10px 0px;
 
+    .formTitle {
+        text-align: center;
+        margin: 5px 0px;
+
+        h1 {
+            font-weight: 700;
+        }
+
+        h2 {
+            color: var(--color-gray-1);
+        }
+    }
+
     form {
         width: 100%;
         display: flex;
         flex-direction: column;
-
-        .formTitle {
-            text-align: center;
-            margin: 5px 0px;
-
-            h1 {
-                font-weight: 700;
-            }
-
-            h2 {
-                color: var(--color-gray-1);
-            }
-        }
 
         #modules {
             width: 100%;
