@@ -38,10 +38,11 @@ export const Box = styled.div `
         flex-direction: column;
 
         #title {
+            margin-bottom: 10px;
+            
             h1 {
                 font-size: 1.3rem;
                 font-weight: bold;
-                margin-bottom: 10px;
                 text-align: center;
                 color: #FFFFFF;
             }
