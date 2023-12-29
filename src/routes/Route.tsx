@@ -1,6 +1,6 @@
 import { ComponentType } from "react"
 import {Redirect, Route as ReactRoute, RouteProps} from "react-router-dom"
-import {useAuth} from "../providers/AuthContext/index"
+import {useUserContext} from "../providers/UserContext/index"
 
 
 interface Props extends RouteProps{
@@ -11,7 +11,7 @@ interface Props extends RouteProps{
 
 export const Route = ({isPrivate= false, component: Component, ...rest }: Props) => {
 
-    const {token} = useAuth()
+    const {token} = useUserContext()
 
     return (
         <ReactRoute {...rest} render={() => 

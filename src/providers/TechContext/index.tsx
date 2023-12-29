@@ -6,7 +6,7 @@ import {api} from "../../services/api"
 import {TTech, TCreateTech, TUpdateTech} from "../../types/tech.type"
 
 import {useDashboardContext} from "../DashboardContext/index"
-import {useAuth} from "../AuthContext/index"
+import {useUserContext} from "../UserContext/index"
 
 import {toast} from "react-toastify"
 
@@ -29,10 +29,10 @@ interface ContextData {
 
 const TechContext = createContext<ContextData>({} as ContextData)
 
-export const TechProvider = ({children}: ChildrenProps) => {
+export const TechContextProvider = ({children}: ChildrenProps) => {
 
     const {setModalOpen} = useDashboardContext()
-    const {token, user} = useAuth()
+    const {token, user} = useUserContext()
 
     const [techs, setTechs] = useState<TTech[]>([])
 

@@ -1,12 +1,12 @@
 import {Container} from "./style"
 import {ContainerCenter} from "../../styles/center"
 
-import {useAuth} from "../../providers/AuthContext/index"
+import {useUserContext} from "../../providers/UserContext/index"
 
 
 export const Header = () => {
 
-    const {logout} = useAuth()
+    const {logout} = useUserContext()
 
     return (
         <Container>

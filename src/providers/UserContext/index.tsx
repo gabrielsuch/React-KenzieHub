@@ -11,7 +11,7 @@ interface ChildrenProps {
     children: ReactNode
 }
 
-interface DataProps {
+interface AuthProps {
     token: string
     user: UserProps
 }
@@ -38,13 +38,13 @@ interface ContextData {
     logout: () => void
 }
 
-const AuthContext = createContext<ContextData>({} as ContextData)
+const UserContext = createContext({} as ContextData)
 
-export const AuthProvider = ({children}: ChildrenProps) => {
+export const UserContextProvider = ({children}: ChildrenProps) => {
     
     const history = useHistory()
 
-    const [data, setData] = useState<DataProps>(() => {
+    const [auth, setAuth] = useState<AuthProps>(() => {
         const token = localStorage.getItem("@KenzieHub:token")
         const user = localStorage.getItem("@KenzieHub:user")
 
@@ -55,7 +55,7 @@ export const AuthProvider = ({children}: ChildrenProps) => {
             }
         }
 
-        return {} as DataProps
+        return {} as AuthProps
     })
 
     const createRegister = async (data: TCreateUser): Promise<void> => {
@@ -83,7 +83,7 @@ export const AuthProvider = ({children}: ChildrenProps) => {
             localStorage.setItem("@KenzieHub:token", token)
             localStorage.setItem("@KenzieHub:user", JSON.stringify(user))
             
-            setData({token, user})
+            setAuth({token, user})
             history.push("/dashboard")
             toast.success(`Seja Bem-vindo, ${user.name}`)
 
@@ -97,16 +97,16 @@ export const AuthProvider = ({children}: ChildrenProps) => {
         localStorage.removeItem("@KenzieHub:user")
         localStorage.clear()
 
-        setData({} as DataProps)
+        setAuth({} as AuthProps)
         history.push("/")
     }
 
     
     return (
-        <AuthContext.Provider value={{token: data.token, user: data.user, createRegister, login, logout}}>
+        <UserContext.Provider value={{token: auth.token, user: auth.user, createRegister, login, logout}}>
             {children}
-        </AuthContext.Provider>
+        </UserContext.Provider>
     )
 }
 
-export const useAuth = () => useContext(AuthContext)
+export const useUserContext = () => useContext(UserContext)

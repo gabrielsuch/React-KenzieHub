@@ -1,8 +1,8 @@
 import {ReactNode} from "react"
 
 import {DashboardContextProvider} from "./DashboardContext/index"
-import {AuthProvider} from "./AuthContext/index"
-import {TechProvider} from "./TechContext/index"
+import {UserContextProvider} from "./UserContext/index"
+import {TechContextProvider} from "./TechContext/index"
 
 
 interface ChildrenProps {
@@ -13,11 +13,11 @@ interface ChildrenProps {
 export const Providers = ({children}: ChildrenProps) => {
     return (
         <DashboardContextProvider>
-            <AuthProvider>
-                <TechProvider>
+            <UserContextProvider>
+                <TechContextProvider>
                     {children}
-                </TechProvider>
-            </AuthProvider>
+                </TechContextProvider>
+            </UserContextProvider>
         </DashboardContextProvider>
     )
 }

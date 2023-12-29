@@ -2,8 +2,6 @@ import {Container, Header, Box, Register, Form, Title, RegisterButton, Modules, 
 
 import {Input} from "../../components/Input/index"
 
-import {useAuth} from "../../providers/AuthContext/index"
-
 import {useForm} from "react-hook-form"
 import {yupResolver} from "@hookform/resolvers/yup"
 
@@ -12,14 +10,16 @@ import {TCreateUser} from "../../types/user.type"
 
 import {useHistory} from "react-router-dom"
 
+import {useUserContext} from "../../providers/UserContext/index"
+
 
 export const Signup = () => {
 
     const history = useHistory()
 
-    const {createRegister} = useAuth()
+    const {createRegister} = useUserContext()
 
-    const modules = ["Primeiro Módulo", "Segundo Módulo", "Terceiro Módulo", "Quarto Módulo"]
+    const modules: readonly string[] = ["Primeiro Módulo", "Segundo Módulo", "Terceiro Módulo", "Quarto Módulo"]
 
     const {register, handleSubmit, formState: {errors}} = useForm<TCreateUser>({
         resolver: yupResolver(createUserSchema)

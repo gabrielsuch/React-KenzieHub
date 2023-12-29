@@ -10,12 +10,12 @@ import {yupResolver} from "@hookform/resolvers/yup"
 import {loginSchema} from "../../schemas/user.schema"
 import {TLogin} from "../../types/user.type"
 
-import {useAuth} from "../../providers/AuthContext/index"
+import {useUserContext} from "../../providers/UserContext/index"
 
 
 export const Login = () => {
 
-    const {login} = useAuth()
+    const {login} = useUserContext()
 
     const history = useHistory()
 
