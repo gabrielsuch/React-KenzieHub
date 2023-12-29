@@ -26,14 +26,12 @@ export const Header = styled.header `
     }
 
     #containerBackButton {
-        border-radius: 4px;
-        padding: 10px;
-        background-color: var(--color-gray-3);
-        cursor: pointer;
-        
         button {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            background-color: var(--color-gray-3);
             color: var(--color-gray-0);
-            background-color: transparent;
             cursor: pointer;
         }
     }
@@ -42,51 +40,55 @@ export const Header = styled.header `
 export const Box = styled.div `
     max-width: 500px;
     width: 100%;
+    display: flex;
+    flex-direction: column;
     background-color: var(--color-gray-3);
     border-radius: 4px;
     padding: 42px 22px;
     margin: 10px 0px;
 
-    .formTitle {
-        text-align: center;
-        margin: 5px 0px;
-
-        h1 {
-            font-weight: 700;
+    .message {
+        .formTitle {
+            text-align: center;
+            margin: 5px 0px;
+    
+            h1 {
+                font-weight: 700;
+            }
+    
+            h2 {
+                color: var(--color-gray-1);
+            }
         }
+    }
+`
 
-        h2 {
-            color: var(--color-gray-1);
+export const Form = styled.form `
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    #modules {
+        width: 100%;
+
+        select {
+            width: 100%;
+            padding: 16px;
+            margin: 20px 0px;
+            color: #FFFFFF;
+            background-color: var(--color-gray-2);
         }
     }
 
-    form {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-
-        #modules {
+    #containerButton {
+        button {
             width: 100%;
-
-            select {
-                width: 100%;
-                padding: 16px;
-                margin: 20px 0px;
-                color: #FFFFFF;
-                background-color: var(--color-gray-2);
-            }
-        }
-
-        #containerButton {
-            button {
-                width: 100%;
-                padding: 22px;
-                border-radius: 4px;
-                text-align: center;
-                color: #FFFFFF;
-                background-color: #59322F;
-                cursor: pointer;
-            }
+            padding: 22px;
+            border-radius: 4px;
+            text-align: center;
+            color: #FFFFFF;
+            background-color: #59322F;
+            cursor: pointer;
         }
     }
 `

@@ -1,4 +1,4 @@
-import {ErrorMessage} from "./style"
+import {Form, ErrorMessage} from "./style"
 
 import {useForm} from "react-hook-form"
 import {yupResolver} from "@hookform/resolvers/yup"
@@ -26,7 +26,7 @@ export const FormSignup = () => {
     const modules: readonly string[] = ["Primeiro Módulo", "Segundo Módulo", "Terceiro Módulo", "Quarto Módulo"]
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <Form onSubmit={handleSubmit(onSubmit)}>
             <Input id="name" label="Nome" type="text" placeholder="Digite aqui seu nome" register={register} error={errors.name}/>
             <Input id="email" label="Email" type="text" placeholder="Digite aqui seu email" register={register} error={errors.email}/>
             <Input id="password" label="Senha" type="password" placeholder="Digite aqui sua senha" register={register} error={errors.password}/>
@@ -47,6 +47,6 @@ export const FormSignup = () => {
             <div id="containerButton">
                 <button type="submit">Cadastrar</button>
             </div>
-        </form>
+        </Form>
     )
 }
