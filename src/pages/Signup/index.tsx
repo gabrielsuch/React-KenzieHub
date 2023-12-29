@@ -1,4 +1,4 @@
-import {Container, Header, Box, Register, Form, Title, RegisterButton, Modules, Select, ErrorMessage} from "./style"
+import {Container, Header, Box, ErrorMessage} from "./style"
 
 import {Input} from "../../components/Input/index"
 
@@ -40,36 +40,34 @@ export const Signup = () => {
                 </div>
             </Header>
             <Box>
-                <Register>
-                    <Form onSubmit={handleSubmit(submit)}>
-                        <Title>
-                            <h1>Crie sua Conta</h1>
-                        </Title>
-                        <Title>
-                            <h2>Rápido e Grátis, vamos nessa</h2>
-                        </Title>
-                        <Input id="name" label="Nome" type="text" placeholder="Digite aqui seu nome" register={register} error={errors.name}/>
-                        <Input id="email" label="Email" type="text" placeholder="Digite aqui seu email" register={register} error={errors.email}/>
-                        <Input id="password" label="Senha" type="password" placeholder="Digite aqui sua senha" register={register} error={errors.password}/>
-                        <Input id="confirm_password" label="Confirmar Senha" type="password" placeholder="Digite novamente sua senha" register={register} error={errors.confirm_password}/>
-                        <Input id="bio" label="Bio" type="text" placeholder="Fale sobre você" register={register} error={errors.bio}/>
-                        <Input id="contact" label="Contato" type="text" placeholder="Opção de Contato" register={register} error={errors.contact}/>
+                <form onSubmit={handleSubmit(submit)}>
+                    <div className="formTitle">
+                        <h1>Crie sua Conta</h1>
+                    </div>
+                    <div className="formTitle">
+                        <h2>Rápido e Grátis, vamos nessa</h2>
+                    </div>
+                    <Input id="name" label="Nome" type="text" placeholder="Digite aqui seu nome" register={register} error={errors.name}/>
+                    <Input id="email" label="Email" type="text" placeholder="Digite aqui seu email" register={register} error={errors.email}/>
+                    <Input id="password" label="Senha" type="password" placeholder="Digite aqui sua senha" register={register} error={errors.password}/>
+                    <Input id="confirm_password" label="Confirmar Senha" type="password" placeholder="Digite novamente sua senha" register={register} error={errors.confirm_password}/>
+                    <Input id="bio" label="Bio" type="text" placeholder="Fale sobre você" register={register} error={errors.bio}/>
+                    <Input id="contact" label="Contato" type="text" placeholder="Opção de Contato" register={register} error={errors.contact}/>
 
-                        <Modules>
-                            <Select {...register("course_module")}>
-                            {
-                                modules.map((module, index) => {
-                                    return <option key={index}>{module}</option>
-                                })
-                            }
-                            </Select>
-                        </Modules>
-                        <ErrorMessage>{errors.course_module?.message}</ErrorMessage>
-                        <RegisterButton type="submit">
-                            <h2>Cadastrar</h2>
-                        </RegisterButton>
-                    </Form>
-                </Register>
+                    <div id="modules">
+                        <select {...register("course_module")}>
+                        {
+                            modules.map((module, index) => {
+                                return <option key={index}>{module}</option>
+                            })
+                        }
+                        </select>
+                    </div>
+                    <ErrorMessage>{errors.course_module?.message}</ErrorMessage>
+                    <div className="containerButton">
+                        <button type="submit">Cadastrar</button>
+                    </div>
+                </form>
             </Box>
         </Container>
     )

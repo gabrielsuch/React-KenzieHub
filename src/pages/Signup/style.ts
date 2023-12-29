@@ -1,5 +1,6 @@
 import styled from "styled-components"
 
+
 export const Container = styled.div `
     width: 100%;
     height: 100%;
@@ -44,61 +45,52 @@ export const Box = styled.div `
     background-color: var(--color-gray-3);
     border-radius: 4px;
     padding: 42px 22px;
-`
+    margin: 10px 0px;
 
-export const Form = styled.form `
-    color: red;
-
-    @media (max-width: 420px){
+    form {
+        width: 100%;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+
+        .formTitle {
+            text-align: center;
+            margin: 5px 0px;
+
+            h1 {
+                font-weight: 700;
+            }
+
+            h2 {
+                color: var(--color-gray-1);
+            }
+        }
+
+        #modules {
+            width: 100%;
+
+            select {
+                width: 100%;
+                padding: 16px;
+                margin: 20px 0px;
+                color: #FFFFFF;
+                background-color: var(--color-gray-2);
+            }
+        }
+
+        .containerButton {
+            button {
+                width: 100%;
+                padding: 22px;
+                border-radius: 4px;
+                text-align: center;
+                color: #FFFFFF;
+                background-color: #59322F;
+                cursor: pointer;
+            }
+        }
     }
 `
 
 export const ErrorMessage = styled.span `
     color: red;
 `
-
-export const Register = styled.div `
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-`
-
-export const Title = styled.div `
-    text-align: center;
-    margin: 15px 0px;
-
-    h1 {
-        font-weight: 700;
-    }
-
-    h2 {
-        color: var(--color-gray-1);
-    }
-`
-
-export const RegisterButton = styled.button `
-    width: 100%;
-    background-color: #59322F;
-    padding: 22px;
-    border-radius: 4px;
-    cursor: pointer;
-
-    h2 {
-        text-align: center;
-    }
-`
-
-export const Modules = styled.div `
-    width: 100%;
-`
-
-export const Select = styled.select `
-    width: 100%;
-    background-color: var(--color-gray-2);
-    color: white;
-    padding: 16px;
-    margin: 20px 0px;
-`   
