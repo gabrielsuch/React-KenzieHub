@@ -1,12 +1,12 @@
 import {Container, Box, ShowOnlyModal} from "../style"
 
-import {FormAddTech} from "./form"
+import {FormUpdateTech} from "./form"
 
 import {useDashboardContext} from "../../../../providers/DashboardContext/index"
 
 
-export const ModalAddTech = () => {
-
+export const ModalUpdateTech = () => {
+    
     const {setModalOpen} = useDashboardContext()
 
     return (
@@ -14,14 +14,14 @@ export const ModalAddTech = () => {
             <Container>
                 <div className="headerTech">
                     <div className="headerTitle">
-                        <h1>Cadastrar Tecnologia</h1>
+                        <h2>Tecnologia Detalhes</h2>
                     </div>
                     <div className="headerClose">
                         <button onClick={() => setModalOpen("None")}>X</button>
                     </div>
                 </div>
                 <Box>
-                    <FormAddTech/>
+                    <FormUpdateTech/>
                 </Box>
             </Container>
             <ShowOnlyModal onClick={() => setModalOpen("None")}/>

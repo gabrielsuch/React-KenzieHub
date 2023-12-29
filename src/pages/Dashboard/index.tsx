@@ -7,7 +7,7 @@ import {Header} from "../../components/Header/index"
 import {Profile} from "../../components/Profile/index"
 import {CardTech} from "../../components/Tech/CardTech/index"
 import {ModalAddTech} from "../../components/Tech/Modal/Add/index"
-import {ModalEditTech} from "../../components/Tech/Modal/Edit/index"
+import {ModalUpdateTech} from "../../components/Tech/Modal/Update/index"
 
 import {useDashboardContext} from "../../providers/DashboardContext/index"
 import {useTech} from "../../providers/TechContext/index"
@@ -50,7 +50,7 @@ export const Dashboard = () => {
                 </ContainerCenter>
             </Container>
             {modalOpen === "AddTech" && <ModalAddTech/>}
-            {modalOpen === "EditTech" && <ModalEditTech/>}
+            {modalOpen === "EditTech" && <ModalUpdateTech/>}
         </>
     )
 }
