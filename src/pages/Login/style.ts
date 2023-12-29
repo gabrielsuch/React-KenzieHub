@@ -28,46 +28,29 @@ export const Header = styled.header `
 export const Box = styled.div `
     max-width: 500px;
     width: 100%;
+    display: flex;
+    flex-direction: column;
     background-color: var(--color-gray-3);
     border-radius: 4px;
     padding: 42px 22px;
-    
-    form {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
 
-        #title {
-            margin-bottom: 10px;
+    #title {
+        margin-bottom: 10px;
             
-            h1 {
-                font-size: 1.3rem;
-                font-weight: bold;
-                text-align: center;
-                color: #FFFFFF;
-            }
+        h1 {
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-align: center;
+            color: #FFFFFF;
         }
+    }
 
-        #containerButton {
-            button {
-                width: 100%;
-                padding: 22px;
-                font-size: 1rem;
-                font-weight: bold;
-                border-radius: 4px;
-                color: #FFFFFF;
-                background-color: var(--color-primary);
-                cursor: pointer;
-            }
-        }
+    #containerMessage {
+        margin: 20px 0px;
 
-        #containerMessage {
-            margin: 20px 0px;
-
-            h3 {
-                text-align: center;
-                color: var(--color-gray-1);
-            }
+        h3 {
+            text-align: center;
+            color: var(--color-gray-1);
         }
     }
 
@@ -82,6 +65,25 @@ export const Box = styled.div `
             border-radius: 4px;
             color: #FFFFFF;
             background-color: var(--color-gray-1);
+            cursor: pointer;
+        }
+    }
+`
+
+export const Form = styled.form `
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    #containerButton {
+        button {
+            width: 100%;
+            padding: 22px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 4px;
+            color: #FFFFFF;
+            background-color: var(--color-primary);
             cursor: pointer;
         }
     }
