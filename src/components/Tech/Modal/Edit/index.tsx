@@ -1,3 +1,5 @@
+import {useEffect} from "react"
+
 import {Container, Box, ShowOnlyModal} from "../style"
 
 import {useForm} from "react-hook-form"
@@ -13,15 +15,21 @@ import {useTech} from "../../../../providers/TechContext/index"
 export const ModalEditTech = () => {
     
     const {setModalOpen} = useDashboardContext()
-    const {difficultyOptions, deleteTech, updateTech, selectedTech} = useTech()
+    const {difficultyOptions, selectedTech, deleteTech, updateTech} = useTech()
 
-    const {register, handleSubmit} = useForm<TUpdateTech>({
+    const {register, handleSubmit, reset} = useForm<TUpdateTech>({
         resolver: yupResolver(updateTechSchema)
     })
 
     const onSubmit = async (data: TUpdateTech) => {
         await updateTech(selectedTech.id, data)
     }
+
+    useEffect(() => {
+        reset({
+            status: selectedTech.status
+        })
+    }, [])
 
     return (
         <>
@@ -39,7 +47,7 @@ export const ModalEditTech = () => {
                         <select {...register("status")}>
                         {
                             difficultyOptions.map((option, index) => (
-                                <option key={index}>{option}</option>
+                                <option key={index} value={option}>{option}</option>
                             ))
                         }
                         </select>
