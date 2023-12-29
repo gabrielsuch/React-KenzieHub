@@ -1,18 +1,18 @@
 import {Container, Header, Main, Select, ShowOnlyContainer} from "./style"
 
-import {Input} from "../Input/index"
+import {Input} from "../../../Input/index"
 
 import {useForm} from "react-hook-form"
 import {yupResolver} from "@hookform/resolvers/yup"
 
-import {createTechSchema} from "../../schemas/tech.schema"
-import {TCreateTech} from "../../types/tech.type"
+import {createTechSchema} from "../../../../schemas/tech.schema"
+import {TCreateTech} from "../../../../types/tech.type"
 
-import {useDashboardContext} from "../../providers/DashboardContext/index"
-import {useTech} from "../../providers/TechContext/index"
+import {useDashboardContext} from "../../../../providers/DashboardContext/index"
+import {useTech} from "../../../../providers/TechContext/index"
 
 
-export const ModalAdd = () => {
+export const ModalAddTech = () => {
 
     const {setModalOpen} = useDashboardContext()
     const {difficultyOptions, createTech} = useTech()
@@ -21,7 +21,7 @@ export const ModalAdd = () => {
         resolver: yupResolver(createTechSchema)
     })
 
-    const submit = async (data: TCreateTech) => {
+    const onSubmit = async (data: TCreateTech) => {
         await createTech(data)
     }
 
@@ -33,14 +33,14 @@ export const ModalAdd = () => {
                     <button onClick={() => setModalOpen("None")}>X</button>
                 </Header>
                 <Main>
-                    <form onSubmit={handleSubmit(submit)}>
+                    <form onSubmit={handleSubmit(onSubmit)}>
                         <Input type="text" id="title" placeholder="Nome" label="Nome" register={register} error={errors.title}/>
                         <Select {...register("status")}>
                             {
                                 difficultyOptions.map((option, index) => (
                                     <option key={index}>{option}</option>
-                                    ))
-                                }
+                                ))
+                            }
                         </Select>
                         <button type="submit">Cadastrar Tecnologia</button>
                     </form>

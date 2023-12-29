@@ -5,14 +5,14 @@ import {UseFormRegister, Path, FieldValues,  FieldError} from "react-hook-form"
 
 interface InputProps<T extends FieldValues> {
     id: Path<T>
-    label?: string
-    type?: HTMLInputTypeAttribute
-    placeholder?: string
+    label: string
+    type: HTMLInputTypeAttribute
+    placeholder: string
     register: UseFormRegister<T>
     error?: FieldError | null
 }
 
-export const Input = <T extends FieldValues> ({id, label, type, placeholder, register, error = null, ...rest}: InputProps<T>) => {
+export const Input = <T extends FieldValues>({id, label, type, placeholder, register, error = null, ...rest}: InputProps<T>) => {
     return (
         <InputForm>
             <label htmlFor={id}>{label}</label>

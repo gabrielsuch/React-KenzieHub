@@ -3,9 +3,9 @@ import {ContainerCenter} from "../../styles/center"
 
 import {Header} from "../../components/Header/index"
 import {Profile} from "../../components/Profile/index"
-import {CardTech} from "../../components/CardTech/index"
-import {ModalAdd} from "../../components/ModalAdd/index"
-import {ModalEdit} from "../../components/ModalEdit/index"
+import {CardTech} from "../../components/Tech/CardTech/index"
+import {ModalAddTech} from "../../components/Tech/Modal/Add/index"
+import {ModalEditTech} from "../../components/Tech/Modal/Edit/index"
 
 import {useDashboardContext} from "../../providers/DashboardContext/index"
 import {useTech} from "../../providers/TechContext/index"
@@ -26,8 +26,8 @@ export const Dashboard = () => {
         <>
             <Header/>
             <Profile/>
-            {modalOpen === "AddTech" && <ModalAdd/>}
-            {modalOpen === "EditTech" && <ModalEdit/>}
+            {modalOpen === "AddTech" && <ModalAddTech/>}
+            {modalOpen === "EditTech" && <ModalEditTech/>}
             <Container>
                 <ContainerCenter>
                     <div id="headerTech">

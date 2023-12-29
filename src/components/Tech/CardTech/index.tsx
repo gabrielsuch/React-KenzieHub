@@ -2,9 +2,9 @@ import React from "react"
 
 import {Container} from "./style"
 
-import {TTech} from "../../types/tech.type"
+import {TTech} from "../../../types/tech.type"
 
-import {Modal} from "../../providers/DashboardContext/index"
+import {Modal} from "../../../providers/DashboardContext/index"
 
 
 interface TechProps {

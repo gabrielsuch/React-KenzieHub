@@ -3,14 +3,14 @@ import {Container, ShowOnlyContainer, Header, Main, Select, Actions, SaveButton,
 import {useForm} from "react-hook-form"
 import {yupResolver} from "@hookform/resolvers/yup"
 
-import {updateTechSchema} from "../../schemas/tech.schema"
-import {TUpdateTech} from "../../types/tech.type"
+import {updateTechSchema} from "../../../../schemas/tech.schema"
+import {TUpdateTech} from "../../../../types/tech.type"
 
-import {useDashboardContext} from "../../providers/DashboardContext/index"
-import {useTech} from "../../providers/TechContext/index"
+import {useDashboardContext} from "../../../../providers/DashboardContext/index"
+import {useTech} from "../../../../providers/TechContext/index"
 
 
-export const ModalEdit = () => {
+export const ModalEditTech = () => {
     
     const {setModalOpen} = useDashboardContext()
     const {difficultyOptions, deleteTech, updateTech, selectedTech} = useTech()
@@ -19,7 +19,7 @@ export const ModalEdit = () => {
         resolver: yupResolver(updateTechSchema)
     })
 
-    const handleClick = async (data: TUpdateTech) => {
+    const onSubmit = async (data: TUpdateTech) => {
         await updateTech(selectedTech.id, data)
     }
 
@@ -31,7 +31,7 @@ export const ModalEdit = () => {
                     <button onClick={() => setModalOpen("None")}>X</button>
                 </Header>
                 <Main>
-                    <form onSubmit={handleSubmit(handleClick)}>
+                    <form onSubmit={handleSubmit(onSubmit)}>
                         <Select {...register("status")}>
                             {
                                 difficultyOptions.map((option, index) => (
